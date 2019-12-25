@@ -1,0 +1,7 @@
+{
+  "name": "ionicseller",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
