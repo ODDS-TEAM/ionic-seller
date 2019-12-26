@@ -6,27 +6,34 @@
           <ion-img [src]="'../../assets/images/logo.png'"
             style="display: block; margin-left: auto; margin-right: auto; width: 30%;"></ion-img>
         </div>
-        <form class="ion-text-center">
+        <form [formGroup]="credentialsForm" (ngSubmit)="onClickLogin()" class="ion-text-center">
           <ion-item>
-            <ion-label position="floating">ชื่อผู้ใช้</ion-label>
-            <ion-input required type="text"></ion-input>
+            <ion-label position="stacked">ชื่อผู้ใช้</ion-label>
+            <ion-input required formControlName="username" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">รหัสผ่าน</ion-label>
-            <ion-input required type="password"></ion-input>
+            <ion-label position="stacked">รหัสผ่าน</ion-label>
+            <ion-input required formControlName="password" type="password"></ion-input>
           </ion-item>
-          <ion-button class="ion-margin" type="submit">
-            <p>ลงชื่อเข้าใช้</p>
-          </ion-button>
+          <ion-toolbar class="ion-padding">
+            <ion-buttons class="ion-justify-content-center">
+              <ion-button [disabled]="!credentialsForm.valid" expand="block" fill="outline" size="small"
+                class="ion-margin" type="submit">
+                <p>ลงชื่อเข้าใช้</p>
+              </ion-button>
+            </ion-buttons>
+          </ion-toolbar>
         </form>
         <div class="row ion-align-text-center">
           <p class="text-center">ไม่สามารถลงชื่อเข้าใช้ได้. <a>ลืมรหัสผ่าน</a></p>
         </div>
-        <div class="row ion-margin ion-margin-top text-center">
-          <ion-button>
-            <p>ลงทะเบียน</p>
-          </ion-button>
-        </div>  
+        <div style="margin: 32px;" class="row ion-margin-top text-center">
+          <ion-toolbar>
+            <ion-button (click)="onClickRegister()" expand="full" size="small" color="warning">
+              <p>ลงทะเบียน</p>
+            </ion-button>
+          </ion-toolbar>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>

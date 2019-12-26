@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ลงทะเบียน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding" style="height: 100%;">
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <form [formGroup]="credentialsForm" (ngSubmit)="onClickNext()">
+          <ion-item>
+            <ion-label position="stacked">อีเมลล์</ion-label>
+            <ion-input required type="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">ชื่อผู้ใช้</ion-label>
+            <ion-input required type="text" formControlName="username"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">รหัสผ่าน</ion-label>
+            <ion-input required type="password" formControlName="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">ยืนยันรหัสผ่าน</ion-label>
+            <ion-input required type="password" formControlName="confirmPassword"></ion-input>
+          </ion-item>
+          <div class="row ion-padding ion-text-center">
+            <ion-button type="submit" [disabled]="!credentialsForm.valid" size="large" color="success" shape="round">
+              <ion-icon name="arrow-round-forward"></ion-icon>
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
