@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ลงทะเบียน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding" style="height: 100%;">
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <div class="row ion-padding ion-text-center">
+          <ion-button (click)="gotoTabs()" size="small">
+            <p>ไปหน้าอื่นก่อนนะ ยังอัพโหลดไม่ได้</p>
+          </ion-button>
+        </div>
+        <form [formGroup]="storeForm" (ngSubmit)="onClickConfirm()">
+          <div class="row ion-padding ion-text-center">
+            <ion-button (click)="selectImage()" size="large" color="success" shape="round">
+              <p>อัพโหลดรูปภาพ</p>
+            </ion-button>
+          </div>
+          <ion-item>
+            <ion-label position="stacked">ชื่อร้าน</ion-label>
+            <ion-input required type="text" formControlName="storeName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">ชื่อเจ้าของร้าน</ion-label>
+            <ion-input required type="text" formControlName="ownerName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
+            <ion-input required type="text" formControlName="phoneNumber"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">คำอธิบาย</ion-label>
+            <ion-input required type="text" formControlName="describe"></ion-input>
+          </ion-item>
+          <div class="row ion-padding ion-text-center">
+            <ion-button type="submit" [disabled]="!storeForm.valid" size="large" color="success" shape="round">
+              <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

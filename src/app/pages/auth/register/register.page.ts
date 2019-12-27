@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -36,6 +37,13 @@ export class RegisterPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(1)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(1)]]
     });
+
+    this.credentialsForm.setValue({
+      email: 'tm@odds.team',
+      username: 'teema',
+      password: '123',
+      confirmPassword: '123',
+    })
   }
 
   onClickNext() {
@@ -55,7 +63,11 @@ export class RegisterPage implements OnInit {
     }
 
     if (isValid)
-      console.log('Form ok');
+      this.router.navigate(['register-store'], { queryParams: {
+        email: email,
+        username: username,
+        password: password,
+      }});
     else
       this.presentAlert(alertMessage);
   }
