@@ -8,6 +8,7 @@ import { TablePageRoutingModule } from './table-routing.module';
 
 import { TablePage } from './table.page';
 import { FoodCardComponent } from 'src/app/components/food-card/food-card.component';
+import { WeekMenusService } from 'src/app/service/week-menus/week-menus.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { FoodCardComponent } from 'src/app/components/food-card/food-card.compon
     IonicModule,
     TablePageRoutingModule
   ],
-  declarations: [TablePage,FoodCardComponent]
+  declarations: [TablePage,FoodCardComponent],
+  providers: [WeekMenusService]
 })
 export class TablePageModule {}
