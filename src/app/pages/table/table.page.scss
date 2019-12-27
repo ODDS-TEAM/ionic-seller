@@ -1,6 +1,20 @@
 .day_row {
     border-bottom-style: groove;
+    padding-bottom: 5px;
     .name {
         text-align: center;font-size: smaller;
     }
+    .card-col {
+        padding-top: 0;
+    }
+}
+
+.button-area {
+    text-align: right;
+    margin-left: unset;
+    margin-right: unset;
+    -webkit-margin-start: 10px;
+    margin-inline-start: 10px;
+    -webkit-margin-end: 10px;
+    margin-inline-end: 10px;
 }
