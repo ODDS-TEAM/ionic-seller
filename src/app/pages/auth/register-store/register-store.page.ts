@@ -77,7 +77,7 @@ export class RegisterStorePage implements OnInit {
         name: this.storeName,
         owner: this.ownerName,
         phoneNumber: this.phoneNumber,
-        describe: describe,
+        describe: this.describe,
       }
     })
   }
@@ -238,7 +238,7 @@ export class RegisterStorePage implements OnInit {
   }
 
   gotoTabs() {
-    this.router.navigate(['tabs']);
+    this.router.navigate(['/tabs/order'], { replaceUrl: true });
   }
 
 }

@@ -56,18 +56,21 @@ export class RegisterPage implements OnInit {
 
     let alertMessage = "";
     let isValid = true;
-      
+
     if (confirmPassword != password) {
       alertMessage += "กรอกรหัสผ่านไม่ตรงกัน ";
       isValid = false;
     }
 
     if (isValid)
-      this.router.navigate(['register-store'], { queryParams: {
-        email: email,
-        username: username,
-        password: password,
-      }});
+      this.router.navigate(['register-store'], {
+        replaceUrl: true,
+        queryParams: {
+          email: email,
+          username: username,
+          password: password,
+        }
+      });
     else
       this.presentAlert(alertMessage);
   }
