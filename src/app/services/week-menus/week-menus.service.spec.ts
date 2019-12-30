@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { WeekMenusService } from './week-menus.service';
 
-describe('TableService', () => {
+describe('WeekMenusService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
