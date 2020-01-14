@@ -11,8 +11,7 @@
         จันทร์
       </ion-col>
       <ion-col size="10" class="card-col">
-        <food-card imgUrl="assets/images/ka-praw.jpg" name="กะเพราเปล่าเปล่า" limit="250"></food-card>
-        <food-card imgUrl="assets/images/ka-praw.jpg" name="กะเพราไก่" limit="30"></food-card>
+        <food-card *ngFor="let items of listMenusForMon" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
         <div class="button-area">
           <ion-button style="margin: 0;">
             <ion-icon slot="icon-only" name="create"></ion-icon>
@@ -25,10 +24,11 @@
         อังคาร
       </ion-col>
       <ion-col size="10" class="card-col">
-        <food-card imgUrl="assets/images/pad-see-ew.png"></food-card>
+        <food-card *ngFor="let items of listMenusForTue" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
         <div class="button-area">
           <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
+            <ion-icon slot="icon-only" name="create" *ngIf="listMenusForTue.length != 0"></ion-icon>
+            <ion-icon slot="icon-only" name="add"></ion-icon>
           </ion-button>
         </div>
       </ion-col>
@@ -38,8 +38,7 @@
         พฤหัสบดี
       </ion-col>
       <ion-col size="10" class="card-col">
-        <food-card imgUrl="assets/images/kao-pad.png"></food-card>
-        <food-card imgUrl="assets/images/ka-praw.jpg"></food-card>
+        <food-card *ngFor="let items of listMenusForThu" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
         <div class="button-area">
           <ion-button style="margin: 0;">
             <ion-icon slot="icon-only" name="create"></ion-icon>
@@ -52,7 +51,7 @@
         ศุกร์
       </ion-col>
       <ion-col size="10" class="card-col">
-        <food-card imgUrl="assets/images/pad-see-ew.png"></food-card>
+        <food-card *ngFor="let items of listMenusForFri" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
         <div class="button-area">
           <ion-button style="margin: 0;">
             <ion-icon slot="icon-only" name="create"></ion-icon>
