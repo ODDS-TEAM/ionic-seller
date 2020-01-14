@@ -15,28 +15,68 @@
         </div>
         <form [formGroup]="storeForm" (ngSubmit)="onClickConfirm()">
           <div class="row ion-padding ion-text-center">
-            <ion-button (click)="selectImage()" size="large" color="success" shape="round">
+            <ion-button
+              (click)="selectImage()"
+              size="large"
+              color="success"
+              shape="round"
+            >
               <p>อัพโหลดรูปภาพ</p>
             </ion-button>
+            <ion-button
+              (click)="startUpload()"
+              size="small"
+              color="warning"
+              shape="round"
+            >
+              <p>กดเพื่ออัพโหลด</p>
+            </ion-button>
+          </div>
+          <div class="row ion-padding ion-text-center" >
+            <ion-avatar (click)="selectImage()" style="display: block; margin-left: auto; margin-right: auto; width: 70px; height: 70px;">
+              <ion-img [src]="imagePath"></ion-img>
+            </ion-avatar>
           </div>
           <ion-item>
             <ion-label position="stacked">ชื่อร้าน</ion-label>
-            <ion-input required type="text" formControlName="storeName"></ion-input>
+            <ion-input
+              required
+              type="text"
+              formControlName="storeName"
+            ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">ชื่อเจ้าของร้าน</ion-label>
-            <ion-input required type="text" formControlName="ownerName"></ion-input>
+            <ion-input
+              required
+              type="text"
+              formControlName="ownerName"
+            ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
-            <ion-input required type="text" formControlName="phoneNumber"></ion-input>
+            <ion-input
+              required
+              type="text"
+              formControlName="phoneNumber"
+            ></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">คำอธิบาย</ion-label>
-            <ion-input required type="text" formControlName="describe"></ion-input>
+            <ion-input
+              required
+              type="text"
+              formControlName="describe"
+            ></ion-input>
           </ion-item>
           <div class="row ion-padding ion-text-center">
-            <ion-button type="submit" [disabled]="!storeForm.valid" size="large" color="success" shape="round">
+            <ion-button
+              type="submit"
+              [disabled]="!storeForm.valid"
+              size="large"
+              color="success"
+              shape="round"
+            >
               <ion-icon name="checkmark"></ion-icon>
             </ion-button>
           </div>

@@ -4,13 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActionSheetController, Platform, ToastController, LoadingController } from '@ionic/angular';
 import { FilePath } from '@ionic-native/file-path/ngx';
-import { File, FileEntry } from '@ionic-native/file/ngx';
+import { File, FileEntry, IFile } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { HttpClient } from '@angular/common/http';
 
 import { finalize } from 'rxjs/operators';
 
+import { Capacitor, Plugins, CameraResultType, FilesystemDirectory } from '@capacitor/core';
+import { present } from '@ionic/core/dist/types/utils/overlays';
+
+const { CapCamera, Filesystem } = Plugins;
 const STORAGE_KEY = 'my_images';
 
 @Component({
@@ -20,7 +24,9 @@ const STORAGE_KEY = 'my_images';
 })
 export class RegisterStorePage implements OnInit {
 
-  images = [];
+  images: any;
+
+  imagePath = '../../assets/images/logo.png';
 
   email: string;
   username: string;
@@ -79,7 +85,7 @@ export class RegisterStorePage implements OnInit {
         phoneNumber: this.phoneNumber,
         describe: this.describe,
       }
-    })
+    });
   }
 
   async selectImage() {
@@ -102,9 +108,9 @@ export class RegisterStorePage implements OnInit {
   }
 
   takePicture(sourceType: PictureSourceType) {
-    var options: CameraOptions = {
+    const options: CameraOptions = {
       quality: 100,
-      sourceType: sourceType,
+      sourceType,
       saveToPhotoAlbum: false,
       correctOrientation: true,
     };
@@ -113,64 +119,74 @@ export class RegisterStorePage implements OnInit {
       if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
         this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName())
+            this.imagePath = filePath;
+            const correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+            const currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
           });
       } else {
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        this.imagePath = imagePath;
+        const currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        const correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
         this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
-    })
+    });
   }
 
   createFileName() {
-    var d = new Date(),
-        n = d.getTime,
-        newFileName = n + ".jpg";
+    const d = new Date(),
+      n = d.getTime(),
+      newFileName = '' + n + '.jpg';
     return newFileName;
   }
 
-  copyFileToLocalDir(namePath, currentName, newFileName) {
-    this.file.copyFile(namePath, currentName, this.file.dataDirectory, newFileName)
-      .then(success => {
-        this.updateStoredImages(newFileName);
-      }, error => {
-        this.presentToast('Error while storing file.');
-      })
+  copyFileToLocalDir(namePath, currentName, newFileName: string) {
+    const oldPath = namePath + currentName;
+    const newPath = this.file.dataDirectory + newFileName;
+    Filesystem.copy({
+      from: oldPath,
+      to: newPath
+    }).then(result => {
+      this.updateStoredImages(newPath);
+    }).catch(err => {
+      this.presentToast('Error while copy file to local directory');
+    });
   }
 
   updateStoredImages(name) {
     this.storage.get(STORAGE_KEY).then(images => {
-      let arr = JSON.parse(images);
+      const arr = JSON.parse(images);
       if (!arr) {
-        let newImages = [name];
+        const newImages = [name];
         this.storage.set(STORAGE_KEY, JSON.stringify(newImages));
       } else {
         arr.push(name);
         this.storage.set(STORAGE_KEY, JSON.stringify(arr));
       }
 
-      let filePath = this.file.dataDirectory + name;
-      let resPath = this.pathForImage(filePath);
+      const filePath = this.file.dataDirectory + name.substr(name.lastIndexOf('/') + 1);
+      const resPath = this.pathForImage(filePath);
 
-      let newEntry = {
-        name: name,
+      const newEntry = {
+        name,
         path: resPath,
-        filePath: filePath,
+        filePath,
       };
 
-      this.images = [newEntry];
+      console.log(resPath);
+
+      this.images = newEntry;
+      this.imagePath = resPath;
       this.ref.detectChanges();
     })
+      .catch(err => console.log(err));
   }
 
   pathForImage(img) {
     if (img == null) {
       return '';
     } else {
-      let converted = this.webview.convertFileSrc(img);
+      const converted = this.webview.convertFileSrc(img);
       return converted;
     }
   }
@@ -185,56 +201,88 @@ export class RegisterStorePage implements OnInit {
   }
 
   startUpload(imgEntry) {
-    this.file.resolveLocalFilesystemUrl(imgEntry.filePath)
-      .then(entry => { 
-        ( < FileEntry> entry).file(file => this.readFile(file))
+    this.readFile(this.images.name);
+  }
+
+  readFile(filePath) {
+    console.log('======================READINGFILE!!!!');
+    Filesystem.readFile({
+      path: filePath,
+    })
+      .then(result => {
+
+        const formData = new FormData();
+        const fileName = filePath.substring(filePath.lastIndexOf('/') + 1, filePath.lastIndexOf('?'));
+
+        const byte = atob(result.data);
+        const ab = new ArrayBuffer(byte.length);
+        const ia = new Uint8Array(ab);
+
+        for (let i = 0; i < byte.length; i++) {
+          ia[i] = byte.charCodeAt(i);
+        }
+
+        const imgBlob = new Blob([ab], { type: 'image/jpeg' });
+        formData.append('file', imgBlob, fileName);
+
+        formData.append('username', this.username);
+        formData.append('password', this.password);
+        formData.append('email', this.email);
+        formData.append('storeName', this.storeName);
+        formData.append('ownerName', this.ownerName);
+        formData.append('describe', this.describe);
+        formData.append('phoneNumber', this.phoneNumber);
+
+        console.log('BEFORE CALL UPLOADIMAGEDATA*********************************************')
+
+        this.uploadImageData(formData);
       })
       .catch(err => {
-        this.presentToast('Error while reading file.');
-      })
-  }
-
-  readFile(file: any) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const formData = new FormData();
-      const imgBlob = new Blob([reader.result], {
-        type: file.type
+        console.log(err);
+        this.presentToast('Error while reading file');
       });
-      formData.append('file', imgBlob, file.name);
-
-      formData.append('username', this.username);
-      formData.append('password', this.password);
-      formData.append('email', this.email);
-      formData.append('storeName', this.storeName);
-      formData.append('ownerName', this.ownerName);
-      formData.append('describe', this.describe);
-      formData.append('phoneNumber', this.phoneNumber);
-
-      this.uploadImageData(formData);
-    };
-    reader.readAsArrayBuffer(file);
   }
 
-  async uploadImageData(formData: FormData) {
+  async uploadImageData(formData: any) {
     const loading = await this.loadingController.create({
       message: 'Uploading image...',
     });
     await loading.present();
 
-    this.http.post('http://http://8cc1029f.ngrok.io/upload', formData)
-      .pipe(
-        finalize(() => {
-          loading.dismiss();
-        })
-      )
-      .subscribe(res => {
-        if (res['success']) {
-          this.presentToast('File upload complete.');
-        } else {
-          this.presentToast('File upload failed.');
-        }
-      });
+    fetch('http://6869c035.ngrok.io/uploadStore', {
+      method: 'POST',
+      body: formData,
+    }).then(response => {
+        this.presentToast('File upload complete.');
+        loading.dismiss();
+    }).catch(err => {
+      this.presentToast('File upload fail on http');
+      console.log(err);
+      loading.dismiss();
+    });
+
+    // this.http.post(
+    //   'http://6869c035.ngrok.io/uploadStore',
+    //   formData)
+    //   // .pipe(
+    //   //   finalize(() => {
+    //   //     loading.dismiss();
+    //   //   })
+    //   // )
+    //   .subscribe(res => {
+    //     const SUCCESS = 'success';
+    //     console.log(res);
+    //     if (res[SUCCESS]) {
+    //       this.presentToast('File upload complete.');
+    //     } else {
+    //       this.presentToast('File upload failed.');
+    //     }
+    //     loading.dismiss();
+    //   }, err => {
+    //     console.log(err);
+    //     this.presentToast('File upload failed on http.');
+    //     loading.dismiss();
+    //   });
   }
 
   gotoTabs() {
