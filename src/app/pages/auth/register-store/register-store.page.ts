@@ -97,6 +97,8 @@ export class RegisterStorePage implements OnInit {
         describe: this.describe,
       }
     });
+
+    this.gotoTabs();
   }
 
   async selectImage() {
