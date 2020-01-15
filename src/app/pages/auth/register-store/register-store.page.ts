@@ -24,6 +24,17 @@ const STORAGE_KEY = 'my_images';
 })
 export class RegisterStorePage implements OnInit {
 
+  /*
+   * Call selectImage() by press image >> call takePicture() > copyFileToLocalDir()
+   * > updateStoredImages() > " GOT IMAGE!! "
+   *
+   * Press upload > startUpload() > readFile() > uploadImageData()
+   *
+   * TODO:
+   *  - After loading controller dismiss navigating to order
+   *  - Edit UI to match pre-design
+   */
+
   images: any;
 
   imagePath = '../../assets/images/logo.png';
