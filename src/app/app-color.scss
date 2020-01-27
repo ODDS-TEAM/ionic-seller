@@ -10,6 +10,15 @@
 .ion-color-lightgray {
   --ion-color-base: #9d9d9d;
   --ion-color-base-rgb: 157, 157, 157;
+  --ion-color-contrast: #ffffff;
+  --ion-color-contrast-rgb: 37, 37, 37;
+  --ion-color-shade: #797979;
+  --ion-color-tint: #9c9c9c;
+}
+
+.ion-color-gray {
+  --ion-color-base: #808080;
+  --ion-color-base-rgb: 128, 128, 128;
   --ion-color-contrast: #252525;
   --ion-color-contrast-rgb: 37, 37, 37;
   --ion-color-shade: #e9e9e9;

@@ -1,9 +1,279 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>order-confirmation</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-icon
+    (click)="closeModal()"
+    color="lightgray"
+    style="z-index: 2; position: fixed; top: 8px; left: 8px; font-size: 24pt; opacity: 0.8;"
+    name="close-circle"
+  ></ion-icon>
+  <ion-toolbar
+    style="z-index: 1; padding-left: 10%;"
+    class="ion-padding shadow-box"
+  >
+    <div>
+      <ion-text style="font-weight: 600;" color="darkgray"
+        >5/1/2020 09:37</ion-text
+      >
+      <br />
+      <ion-text color="darkgray">order ID: LnwZa555</ion-text>
+    </div>
+    <ion-text style="font-size: 32pt; font-weight: 500;" color="gprimary" slot="end">112</ion-text>
+  </ion-toolbar>
 
+  <ion-toolbar style="z-index: 1;" class="ion-margin-bottom ion-padding-start">
+    <ion-avatar
+      class="ion-margin-end"
+      style="width: 20%; height: auto;"
+      slot="start"
+    >
+      <ion-img
+        [src]="'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"
+      ></ion-img>
+    </ion-avatar>
+    <ion-text style="font-weight: 600; font-size: 14pt;" color="darkgray"
+      >นายประยิท อาทิตย์อุทัย</ion-text
+    >
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-text color="darkgray">Order summary</ion-text>
+    </ion-list-header>
+
+    <ion-item style="margin-bottom: 8px; padding-right: 8px;">
+      <ion-img
+        slot="start"
+        style="width: 25%; margin-top: 8px; margin-bottom: auto;"
+        [src]="'https://food.mthai.com/app/uploads/2017/02/fried-rice.jpg'"
+      ></ion-img>
+      <div style="margin-top: 0px; margin-bottom: auto;">
+        <ion-text color="darkgray" style="font-weight: 600;"
+          >กะเพราหมูกรอบ</ion-text
+        >
+        <br />
+
+        <!-- Please loop this -->
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+      </div>
+      <div
+        slot="end"
+        style="width: 30%; max-width: 30%; margin-top: 0px; margin-bottom: auto;"
+      >
+        <ion-text color="darkgray">2x</ion-text>
+        <ion-text style="float: right; font-weight: bold;" color="darkgray"
+          >55</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item style="margin-bottom: 8px; padding-right: 8px;">
+      <ion-img
+        slot="start"
+        style="width: 25%; margin-top: 8px; margin-bottom: auto;"
+        [src]="'https://food.mthai.com/app/uploads/2017/02/fried-rice.jpg'"
+      ></ion-img>
+      <div style="margin-top: 0px; margin-bottom: auto;">
+        <ion-text color="darkgray" style="font-weight: 600;"
+          >กะเพราหมูกรอบ</ion-text
+        >
+        <br />
+
+        <!-- Please loop this -->
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+      </div>
+      <div
+        slot="end"
+        style="width: 30%; max-width: 30%; margin-top: 0px; margin-bottom: auto;"
+      >
+        <ion-text color="darkgray">2x</ion-text>
+        <ion-text style="float: right; font-weight: bold;" color="darkgray"
+          >55</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item style="margin-bottom: 8px; padding-right: 8px;">
+      <ion-img
+        slot="start"
+        style="width: 25%; margin-top: 8px; margin-bottom: auto;"
+        [src]="'https://food.mthai.com/app/uploads/2017/02/fried-rice.jpg'"
+      ></ion-img>
+      <div style="margin-top: 0px; margin-bottom: auto;">
+        <ion-text color="darkgray" style="font-weight: 600;"
+          >กะเพราหมูกรอบ</ion-text
+        >
+        <br />
+
+        <!-- Please loop this -->
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+      </div>
+      <div
+        slot="end"
+        style="width: 30%; max-width: 30%; margin-top: 0px; margin-bottom: auto;"
+      >
+        <ion-text color="darkgray">2x</ion-text>
+        <ion-text style="float: right; font-weight: bold;" color="darkgray"
+          >55</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item style="margin-bottom: 8px; padding-right: 8px;">
+      <ion-img
+        slot="start"
+        style="width: 25%; margin-top: 8px; margin-bottom: auto;"
+        [src]="'https://food.mthai.com/app/uploads/2017/02/fried-rice.jpg'"
+      ></ion-img>
+      <div style="margin-top: 0px; margin-bottom: auto;">
+        <ion-text color="darkgray" style="font-weight: 600;"
+          >กะเพราหมูกรอบ</ion-text
+        >
+        <br />
+
+        <!-- Please loop this -->
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+      </div>
+      <div
+        slot="end"
+        style="width: 30%; max-width: 30%; margin-top: 0px; margin-bottom: auto;"
+      >
+        <ion-text color="darkgray">2x</ion-text>
+        <ion-text style="float: right; font-weight: bold;" color="darkgray"
+          >55</ion-text
+        >
+      </div>
+    </ion-item>
+    <ion-item style="margin-bottom: 8px; padding-right: 8px;">
+      <ion-img
+        slot="start"
+        style="width: 25%; margin-top: 8px; margin-bottom: auto;"
+        [src]="'https://food.mthai.com/app/uploads/2017/02/fried-rice.jpg'"
+      ></ion-img>
+      <div style="margin-top: 0px; margin-bottom: auto;">
+        <ion-text color="darkgray" style="font-weight: 600;"
+          >กะเพราหมูกรอบ</ion-text
+        >
+        <br />
+
+        <!-- Please loop this -->
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+        <ion-text color="lightgray">ไข่จานบิน</ion-text>
+        <br />
+      </div>
+      <div
+        slot="end"
+        style="width: 30%; max-width: 30%; margin-top: 0px; margin-bottom: auto;"
+      >
+        <ion-text color="darkgray">2x</ion-text>
+        <ion-text style="float: right; font-weight: bold;" color="darkgray"
+          >55</ion-text
+        >
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer
+  style="background-color: white; width: 100%;"
+  class="ion-padding shadow-border"
+>
+  <div class="ion-padding-start ion-margin-top ion-margin-bottom">
+    <ion-text style="font-weight: bold;" color="darkgray"
+      >Payment method</ion-text
+    >
+    <br />
+    <ion-text color="gray" class="ion-padding-start">จ่ายหน้าร้าน</ion-text>
+  </div>
+
+  <ion-toolbar class="ion-no-padding ion-no-margin">
+    <ion-text slot="start" style="font-weight: bold;" color="darkgray" class="ion-padding-start">Total</ion-text>
+    <ion-text slot="end" style="font-weight: 500; font-size: 20pt; float: right;" color="gprimary">200</ion-text>
+  </ion-toolbar>
+
+  <!-- Separate line -->
+  <div
+    style="background-color: #9d9d9d; height: 1px; width: 90%; margin: 12px auto 12px auto;"
+  ></div>
+
+  <div class="ion-text-center">
+    <ion-text style="font-weight: 500;" color="darkgray">Accept this order?</ion-text>
+  </div>
+  <ion-toolbar class="ion-padding-bottom ion-margin-top">
+    <ion-buttons>
+      <div
+        class="ion-text-center"
+        style="width: 35%; height: 36px; margin-left: auto; margin-right: 24px;"
+      >
+        <ion-button fill="solid" shape="block" color="lightgray">No</ion-button>
+        <ion-label style="position: sticky; bottom: -10px;">
+          <ion-text color="danger">reject this order</ion-text>
+        </ion-label>
+      </div>
+      <div
+        class="ion-text-center"
+        style="width: 35%; height: 36px; margin-right: auto; margin-left: 24px;"
+      >
+        <ion-button fill="solid" shape="block" color="gprimary">Yes</ion-button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OrderConfirmationPageRoutingModule } from './order-confirmation-routing.module';
-
 import { OrderConfirmationPage } from './order-confirmation.page';
 
 @NgModule({
@@ -13,8 +11,8 @@ import { OrderConfirmationPage } from './order-confirmation.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    OrderConfirmationPageRoutingModule
   ],
-  declarations: [OrderConfirmationPage]
+  declarations: [OrderConfirmationPage],
+  entryComponents: [OrderConfirmationPage]
 })
 export class OrderConfirmationPageModule {}

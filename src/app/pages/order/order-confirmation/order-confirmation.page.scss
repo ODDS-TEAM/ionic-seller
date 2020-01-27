@@ -1,0 +1,20 @@
+@import "../../../app-color.scss";
+
+ion-item {
+  --inner-border-width: 0;
+}
+
+ion-text {
+  font-family: helvetica !important;
+}
+
+ion-footer {
+  border-top: 1px solid #9d9d9d;
+}
+
+ion-list-header {
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 12pt;
+    font-weight: bold;
+}
