@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: OrderPage
+  },
+  {
+    path: 'order-confirmation',
+    loadChildren: () => import('./order-confirmation/order-confirmation.module').then( m => m.OrderConfirmationPageModule)
   }
 ];
 

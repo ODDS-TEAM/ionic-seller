@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-list',
-  templateUrl: './add-list.page.html',
-  styleUrls: ['./add-list.page.scss'],
+  templateUrl: './menu.page.html',
+  styleUrls: ['./menu.page.scss'],
 })
-export class AddListPage implements OnInit {
+export class MenuPage implements OnInit {
 
   constructor() { }
 

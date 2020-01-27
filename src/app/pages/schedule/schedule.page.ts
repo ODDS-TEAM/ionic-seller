@@ -4,10 +4,10 @@ import { WeekMenus, Stores, Menus } from 'src/app/models/week-menus.model';
 
 @Component({
   selector: 'app-table',
-  templateUrl: './table.page.html',
-  styleUrls: ['./table.page.scss'],
+  templateUrl: './schedule.page.html',
+  styleUrls: ['./schedule.page.scss'],
 })
-export class TablePage implements OnInit {
+export class SchedulePage implements OnInit {
 
   private listMenus: WeekMenus;
   private listMenusForMon: Array<Menus>;

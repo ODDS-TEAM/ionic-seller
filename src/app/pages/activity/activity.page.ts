@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-history',
-  templateUrl: './history.page.html',
-  styleUrls: ['./history.page.scss'],
+  templateUrl: './activity.page.html',
+  styleUrls: ['./activity.page.scss'],
 })
-export class HistoryPage implements OnInit {
+export class ActivityPage implements OnInit {
 
   constructor() { }
 

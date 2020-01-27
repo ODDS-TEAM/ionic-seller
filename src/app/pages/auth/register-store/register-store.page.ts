@@ -299,7 +299,7 @@ export class RegisterStorePage implements OnInit {
   }
 
   gotoTabs() {
-    this.router.navigate(['/tabs/order'], { replaceUrl: true });
+    this.router.navigate(['/main/order'], { replaceUrl: true });
   }
 
 }

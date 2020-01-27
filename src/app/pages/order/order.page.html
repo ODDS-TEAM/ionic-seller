@@ -1,19 +1,122 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>order</ion-title>
+  <ion-toolbar style="padding-top: 14px;">
+    <ion-icon color="lightgray" class="header-icon ion-margin-end" slot="end" name="md-contact"></ion-icon>
+  </ion-toolbar>
+  <ion-toolbar style="padding-bottom: 14px;">
+    <ion-text color="darkgray" class="header-title ion-margin-start ion-margin-bottom">Order</ion-text>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-tabs>
-    <ion-tab-bar slot="top">
-      <ion-tab-button>
-        <ion-label>วันนี้</ion-label>
-      </ion-tab-button>
-      <ion-tab-button>
-        <ion-label>พรุ่งนี้</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+<ion-content color="whitegray">
+  <ion-list class="ion-no-margin">
+    <ion-list-header>
+      <ion-text class="list-header" color="gprimary">Today</ion-text>
+    </ion-list-header>
 
+    <ion-item class="ion-no-padding ion-margin-bottom">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col class="ion-no-padding ion-justify-content-center" style="max-width: 20% !important; height: 100%;">
+            <ion-avatar class="ion-align-self-center" style="margin: auto;">
+              <ion-img [src]="'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"></ion-img>
+            </ion-avatar>
+          </ion-col>
+          <ion-col style="width: 70%;">
+            <ion-text color="darkgray" style="font-weight: bold;">
+              ชื่อลูกค้า
+            </ion-text>
+            <br>
+            <ion-text color="darkgray">
+              0 รายการ
+            </ion-text>
+            <br>
+            <ion-text color="darkgray" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              กะเพราหมูกรอบ ไข่ดาว พิเศษ,​ ข้าวผัดไข่​ ใส่พริกเยอะ ๆ
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item class="ion-no-padding ion-margin-bottom">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col class="ion-no-padding ion-justify-content-center" style="max-width: 20% !important; height: 100%;">
+              <ion-avatar class="ion-align-self-center" style="margin: auto;">
+                <ion-img [src]="'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"></ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col style="width: 70%;">
+              <ion-text color="darkgray" style="font-weight: bold;">
+                ชื่อลูกค้า
+              </ion-text>
+              <br>
+              <ion-text color="darkgray">
+                0 รายการ
+              </ion-text>
+              <br>
+              <ion-text color="darkgray" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                กะเพราหมูกรอบ ไข่ดาว พิเศษ,​ ข้าวผัดไข่​ ใส่พริกเยอะ ๆ
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+  </ion-list>
+
+  <ion-list>
+      <ion-list-header>
+        <ion-text class="list-header" color="gprimary">Tomorrow</ion-text>
+      </ion-list-header>
+  
+      <ion-item class="ion-no-padding ion-margin-bottom">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col class="ion-no-padding ion-justify-content-center" style="max-width: 20% !important; height: 100%;">
+              <ion-avatar class="ion-align-self-center" style="margin: auto;">
+                <ion-img [src]="'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"></ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col style="width: 70%;">
+              <ion-text color="darkgray" style="font-weight: bold;">
+                ชื่อลูกค้า
+              </ion-text>
+              <br>
+              <ion-text color="darkgray">
+                0 รายการ
+              </ion-text>
+              <br>
+              <ion-text color="darkgray" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                กะเพราหมูกรอบ ไข่ดาว พิเศษ,​ ข้าวผัดไข่​ ใส่พริกเยอะ ๆ
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      
+      <ion-item class="ion-no-padding ion-margin-bottom">
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col class="ion-no-padding ion-justify-content-center" style="max-width: 20% !important; height: 100%;">
+                <ion-avatar class="ion-align-self-center" style="margin: auto;">
+                  <ion-img [src]="'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"></ion-img>
+                </ion-avatar>
+              </ion-col>
+              <ion-col style="width: 70%;">
+                <ion-text color="darkgray" style="font-weight: bold;">
+                  ชื่อลูกค้า
+                </ion-text>
+                <br>
+                <ion-text color="darkgray">
+                  0 รายการ
+                </ion-text>
+                <br>
+                <ion-text color="darkgray" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  กะเพราหมูกรอบ ไข่ดาว พิเศษ,​ ข้าวผัดไข่​ ใส่พริกเยอะ ๆ
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+    </ion-list>
 </ion-content>

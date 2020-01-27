@@ -18,45 +18,45 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'table',
+        path: 'schedule',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/table/table.module').then(m => m.TablePageModule)
+              import('../pages/schedule/schedule.module').then(m => m.SchedulePageModule)
           }
         ]
       },
       {
-        path: 'addList',
+        path: 'menu',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/add-list/add-list.module').then(m => m.AddListPageModule)
+              import('../pages/menu/menu.module').then(m => m.MenuPageModule)
           }
         ]
       },
       {
-        path: 'history',
+        path: 'activity',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../pages/history/history.module').then(m => m.HistoryPageModule)
+              import('../pages/activity/activity.module').then(m => m.ActivityPageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/order',
+        redirectTo: '/main/order',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/order',
+    redirectTo: '/main/order',
     pathMatch: 'full'
   }
 ];
