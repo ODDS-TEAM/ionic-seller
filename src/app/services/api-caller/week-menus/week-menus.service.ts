@@ -8,12 +8,12 @@ export class WeekMenusService {
 
   constructor() { }
 
-  getListWeek() : WeekMenus {
+  getListWeek(): WeekMenus {
     const listWeekMenus: WeekMenus = {
       week: 2,
       days: [
         {
-          day: "mon",
+          day: 'mon',
           date: new Date(),
           stores: [
             {
@@ -31,9 +31,9 @@ export class WeekMenusService {
           ]
         },
         {
-          day: "tue",
+          day: 'tue',
           date: new Date(),
-          stores: [ 
+          stores: [
             {
               sellerID: '118899',
               name: 'ตามสั่ง',
@@ -42,7 +42,7 @@ export class WeekMenusService {
           ]
         },
         {
-          day: "thu",
+          day: 'thu',
           date: new Date(),
           stores: [
             {
@@ -66,7 +66,7 @@ export class WeekMenusService {
           ]
         },
         {
-          day: "fri",
+          day: 'fri',
           date: new Date(),
           stores: [
             {
@@ -84,7 +84,7 @@ export class WeekMenusService {
           ]
         }
       ]
-    }
+    };
     return listWeekMenus;
   }
 }

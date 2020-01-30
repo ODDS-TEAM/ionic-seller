@@ -11,12 +11,19 @@
   >
     <div>
       <ion-text style="font-weight: 600;" color="darkgray"
-        >{{ transformDateTime(orderDetail.dateTime) }}</ion-text
+        >{{ transformDateTime(activityDetail.dateTime) }}</ion-text
       >
       <br />
-      <ion-text style="font-size: 8pt;" color="darkgray">order ID: {{ orderDetail._id }}</ion-text>
+      <ion-text style="font-size: 8pt;" color="darkgray"
+        >order ID: {{ activityDetail._id }}</ion-text
+      >
     </div>
-    <ion-text *ngIf="orderDetail.queue != -1" style="font-size: 32pt; font-weight: 500;" color="gprimary" slot="end">{{ orderDetail.queue }}</ion-text>
+    <ion-text
+      style="font-size: 32pt; font-weight: 500;"
+      color="gprimary"
+      slot="end"
+      >{{ activityDetail.queue }}</ion-text
+    >
   </ion-toolbar>
 
   <ion-toolbar style="z-index: 1;" class="ion-margin-bottom ion-padding-start">
@@ -26,11 +33,11 @@
       slot="start"
     >
       <ion-img
-        [src]="'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"
+        [src]="activityDetail.customerImageUrl"
       ></ion-img>
     </ion-avatar>
     <ion-text style="font-weight: 600; font-size: 14pt;" color="darkgray"
-      >{{ orderDetail.customerName }}</ion-text
+      >{{ activityDetail.customerName }}</ion-text
     >
   </ion-toolbar>
 
@@ -39,7 +46,7 @@
       <ion-text color="darkgray">Order summary</ion-text>
     </ion-list-header>
 
-    <ion-item *ngFor="let item of orderDetail.items" style="margin-bottom: 8px; padding-right: 8px;">
+    <ion-item *ngFor="let item of activityDetail.items" style="margin-bottom: 8px; padding-right: 8px;">
       <ion-img
         slot="start"
         style="width: 25%; margin-top: 8px; margin-bottom: auto;"
@@ -51,7 +58,7 @@
         >
         <br />
 
-        <ion-text *ngFor="let optionString of item.options" color="lightgray">{{ optionString }}<br /></ion-text>
+        <ion-text *ngFor="let option of item.options" color="lightgray">{{ option }}<br /></ion-text>
         <br />
       </div>
       <div
@@ -71,18 +78,25 @@
       >Payment method</ion-text
     >
     <br />
-    <ion-text color="gray" class="ion-padding-start">{{ orderDetail.paymentMethod }}</ion-text>
+    <ion-text color="gray" class="ion-padding-start">{{ activityDetail.paymentMethod }}</ion-text>
   </div>
 </ion-content>
 
-<ion-footer
-  style="background-color: white; width: 100%;"
-  class="ion-padding shadow-border"
->
-
+<ion-footer style="background-color: white; width: 100%;" class="ion-padding">
   <ion-toolbar style="--border-width: 0;" class="ion-no-padding ion-no-margin">
-    <ion-text slot="start" style="font-weight: bold;" color="darkgray" class="ion-padding-start">Total</ion-text>
-    <ion-text slot="end" style="font-weight: 500; font-size: 20pt; float: right;" color="gprimary">{{ totalPrice }}</ion-text>
+    <ion-text
+      slot="start"
+      style="font-weight: bold;"
+      color="darkgray"
+      class="ion-padding-start"
+      >Total</ion-text
+    >
+    <ion-text
+      slot="end"
+      style="font-weight: 500; font-size: 20pt; float: right;"
+      color="gprimary"
+      >{{ totalPrice }}</ion-text
+    >
   </ion-toolbar>
 
   <!-- Separate line -->
@@ -90,25 +104,19 @@
     style="background-color: #9d9d9d; height: 1px; width: 90%; margin: 12px auto 12px auto;"
   ></div>
 
-  <div class="ion-text-center">
-    <ion-text style="font-weight: 500;" color="darkgray">Accept this order?</ion-text>
-  </div>
   <ion-toolbar class="ion-padding-bottom ion-margin-top">
     <ion-buttons>
       <div
         class="ion-text-center"
-        style="width: 35%; height: 36px; margin-left: auto; margin-right: 24px;"
+        style="width: 70%; height: 36px; margin-right: auto; margin-left: auto;"
       >
-        <ion-button (click)="rejectOrder()" fill="solid" shape="block" color="lightgray">No</ion-button>
-        <ion-label style="position: sticky; bottom: -10px;">
-          <ion-text color="danger">reject this order</ion-text>
-        </ion-label>
-      </div>
-      <div
-        class="ion-text-center"
-        style="width: 35%; height: 36px; margin-right: auto; margin-left: 24px;"
-      >
-        <ion-button (click)="acceptOrder()" fill="solid" shape="block" color="gprimary">Yes</ion-button>
+        <ion-button
+          (click)="updateOrder()"
+          fill="solid"
+          shape="block"
+          color="gprimary"
+          >{{ activityDetail.state == 'cf' ? 'Cooking done' : 'Complete' }}</ion-button
+        >
       </div>
     </ion-buttons>
   </ion-toolbar>

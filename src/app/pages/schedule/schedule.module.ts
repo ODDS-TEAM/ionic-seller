@@ -8,7 +8,7 @@ import { SchedulePageRoutingModule } from './schedule-routing.module';
 
 import { SchedulePage } from './schedule.page';
 import { FoodCardComponent } from 'src/app/components/food-card/food-card.component';
-import { WeekMenusService } from 'src/app/services/week-menus/week-menus.service';
+import { WeekMenusService } from 'src/app/services/api-caller/week-menus/week-menus.service';
 
 @NgModule({
   imports: [

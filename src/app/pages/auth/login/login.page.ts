@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     console.log(`password: ${this.credentialsForm.value.password}`);
     console.log(this.credentialsForm.value);
   }
-  
+
   onClickRegister() {
     console.log('register clicked');
     this.router.navigate(['register']);

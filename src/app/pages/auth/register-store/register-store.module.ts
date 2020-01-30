@@ -26,7 +26,6 @@ import { IonicStorageModule } from '@ionic/storage';
     RegisterStorePageRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
   ],
   declarations: [RegisterStorePage],
   providers: [

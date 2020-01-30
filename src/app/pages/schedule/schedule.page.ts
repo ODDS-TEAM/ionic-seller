@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { WeekMenusService } from 'src/app/services/week-menus/week-menus.service';
-import { WeekMenus, Stores, Menus } from 'src/app/models/week-menus.model';
+import { WeekMenusService } from 'src/app/services/api-caller/week-menus/week-menus.service';
+import { WeekMenus, Menus } from 'src/app/models/week-menus.model';
 
 @Component({
   selector: 'app-table',

@@ -1,5 +1,3 @@
-@import "../../app-color.scss";
-
 .header-title {
   font-family: helvetica !important;
   font-size: 24pt;
@@ -26,9 +24,19 @@ ion-list-header {
 
 ion-item {
     --inner-border-width: 0;
+    --background-activated: #ff0000;
 }
 
 .list-header {
   font-family: helvetica !important;
   font-size: 12pt !important;
+}
+
+ion-refresher-content {
+  --color: red !important;
+}
+
+.refresher-pulling-text, .refresher-pulling-icon,
+.refresher-refreshing-text, .refresher-refreshing-icon {
+  --color: red !important;
 }
