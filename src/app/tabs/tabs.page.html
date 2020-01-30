@@ -1,13 +1,13 @@
 <ion-tabs>
   <ion-tab-bar style="padding: 8px 0px;" slot="bottom">
     <ion-tab-button tab="order">
-      <ion-badge color="danger"></ion-badge>
+      <ion-badge color="danger">{{ (orderNumber != 0 ? orderNumber : '') }}</ion-badge>
       <ion-icon name="md-clipboard"></ion-icon>
       <ion-label>Order</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="activity">
-      <ion-badge color="danger"></ion-badge>
+      <ion-badge color="danger">{{ (activityNumber != 0 ? activityNumber : '') }}</ion-badge>
       <ion-icon name="md-list-box"></ion-icon>
       <ion-label>Activity</ion-label>
     </ion-tab-button>

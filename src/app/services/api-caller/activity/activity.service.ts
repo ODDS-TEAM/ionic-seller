@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Order } from 'src/app/models/order.model';
 import { OrderDetail } from 'src/app/models/orderDetail.model';
+import { EventBadgeService } from '../../event/event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class ActivityService {
   private ORDER_COMPLETE = `${this.ORDER_URL}/complete`;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private eventBadge: EventBadgeService,
   ) { }
 
   getActivityList(merchantId: string): Promise<{ today: Order[], tomorrow: Order[] }> {
@@ -39,12 +41,15 @@ export class ActivityService {
                 today.push(order);
               }
 
+              this.eventBadge.updateActivityNumber(res.body.length);
+
               resolve({ today, tomorrow });
             } else {
               reject(res);
             }
           }, err => {
             if (err.status === 401) {
+              this.eventBadge.updateActivityNumber(0);
               resolve({ today: [], tomorrow: [] });
             } else {
               reject(err);

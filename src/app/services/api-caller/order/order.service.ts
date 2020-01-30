@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Order, Item } from '../../../models/order.model';
 import { OrderDetail } from '../../../models/orderDetail.model';
 import { HttpClient } from '@angular/common/http';
+import { EventBadgeService } from '../../event/event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class OrderService {
   private ORDER_REJECT_URL = this.ORDER_MAIN_URL + '/cancel';
   private ORDER_ACCEPT_URL = this.ORDER_MAIN_URL + '/confirm';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private eventBadge: EventBadgeService) { }
 
   acceptOrder(orderId: string): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -83,9 +84,12 @@ export class OrderService {
               }
             }
 
+            this.eventBadge.updateOrderNumber(res.body.length);
+
             resolve({ today, tomorrow });
           }, err => {
             if (err.status === 401) {
+              this.eventBadge.updateOrderNumber(0);
               resolve({ today: [], tomorrow: [] });
             } else {
               reject(err);
