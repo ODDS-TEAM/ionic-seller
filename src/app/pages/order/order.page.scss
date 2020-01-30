@@ -33,10 +33,6 @@ ion-item {
 }
 
 ion-refresher-content {
-  --color: red !important;
-}
-
-.refresher-pulling-text, .refresher-pulling-icon,
-.refresher-refreshing-text, .refresher-refreshing-icon {
-  --color: red !important;
+  --color: var(--ion-color-darkgray);
+  --ion-text-color: var(--ion-color-darkgray) !important;
 }

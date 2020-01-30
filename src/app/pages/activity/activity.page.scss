@@ -30,7 +30,16 @@ ion-footer {
     background-color: var(--ion-color-whitegray);
 }
 
+ion-refresher-content {
+  --color: var(--ion-color-darkgray);
+  --ion-text-color: var(--ion-color-darkgray) !important;
+}
+
 .list-header {
   font-family: helvetica !important;
   font-size: 12pt !important;
+}
+
+.status-text {
+  font-size: 8pt;
 }

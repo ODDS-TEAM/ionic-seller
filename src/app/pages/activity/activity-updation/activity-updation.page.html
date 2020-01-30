@@ -1,15 +1,13 @@
 <ion-content>
-  <ion-icon
-    (click)="closeModal()"
-    color="lightgray"
-    style="z-index: 2; position: fixed; top: 8px; left: 8px; font-size: 24pt; opacity: 0.8;"
-    name="close-circle"
-  ></ion-icon>
-  <ion-toolbar
-    style="z-index: 1; padding-left: 10%;"
-    class="ion-padding shadow-box"
-  >
-    <div>
+  <ion-toolbar class="ion-padding shadow-box">
+    <ion-icon
+      slot="start"
+      (click)="closeModal()"
+      color="lightgray"
+      style="font-size: 28pt; opacity: 0.8;"
+      name="close-circle"
+    ></ion-icon>
+    <div class="ion-padding-start ion-padding-end">
       <ion-text style="font-weight: 600;" color="darkgray"
         >{{ transformDateTime(activityDetail.dateTime) }}</ion-text
       >
@@ -32,9 +30,7 @@
       style="width: 20%; height: auto;"
       slot="start"
     >
-      <ion-img
-        [src]="activityDetail.customerImageUrl"
-      ></ion-img>
+      <ion-img [src]="activityDetail.customerImageUrl"></ion-img>
     </ion-avatar>
     <ion-text style="font-weight: 600; font-size: 14pt;" color="darkgray"
       >{{ activityDetail.customerName }}</ion-text
@@ -46,7 +42,10 @@
       <ion-text color="darkgray">Order summary</ion-text>
     </ion-list-header>
 
-    <ion-item *ngFor="let item of activityDetail.items" style="margin-bottom: 8px; padding-right: 8px;">
+    <ion-item
+      *ngFor="let item of activityDetail.items"
+      style="margin-bottom: 8px; padding-right: 8px;"
+    >
       <ion-img
         slot="start"
         style="width: 25%; margin-top: 8px; margin-bottom: auto;"
@@ -58,7 +57,9 @@
         >
         <br />
 
-        <ion-text *ngFor="let option of item.options" color="lightgray">{{ option }}<br /></ion-text>
+        <ion-text *ngFor="let option of item.options" color="lightgray"
+          >{{ option }}<br
+        /></ion-text>
         <br />
       </div>
       <div
@@ -78,7 +79,9 @@
       >Payment method</ion-text
     >
     <br />
-    <ion-text color="gray" class="ion-padding-start">{{ activityDetail.paymentMethod }}</ion-text>
+    <ion-text color="gray" class="ion-padding-start"
+      >{{ activityDetail.paymentMethod }}</ion-text
+    >
   </div>
 </ion-content>
 
@@ -115,7 +118,8 @@
           fill="solid"
           shape="block"
           color="gprimary"
-          >{{ activityDetail.state == 'cf' ? 'Cooking done' : 'Complete' }}</ion-button
+          >{{ activityDetail.state == 'cf' ? 'Cooking done' : 'Complete'
+          }}</ion-button
         >
       </div>
     </ion-buttons>

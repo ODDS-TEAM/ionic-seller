@@ -72,6 +72,7 @@ export class ActivityPage implements OnInit {
 
   async getActivityList(event?) {
     try {
+      this.isLoading = true;
       const uid = await this.storage.getUid();
       this.activityList = await this.activityService.getActivityList(uid);
       this.isLoading = false;

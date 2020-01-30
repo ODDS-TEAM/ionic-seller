@@ -20,10 +20,9 @@
       pullFactor="0.5"
       pullMin="100"
       pullMax="100"
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
+      pullingIcon="null"
       refreshingSpinner="circles"
-      refreshingText="Refreshing..."
+      refreshingText="Refreshing"
     >
     </ion-refresher-content>
   </ion-refresher>
@@ -59,7 +58,7 @@
             </ion-avatar>
           </ion-col>
           <ion-col
-            size="8"
+            size="7"
             class="ion-padding-start ion-padding-end"
             style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
           >
@@ -78,12 +77,27 @@
               {{ joinFoodName(order.items) }}
             </ion-text>
           </ion-col>
-          <ion-col size="2" class="ion-text-center">
+          <ion-col size="3" class="ion-text-center">
             <ion-text
               color="gprimary"
               style="font-weight: 500; font-size: 20pt;"
               >{{ order.queue }}</ion-text
             >
+            <br />
+            <ion-text
+              class="status-text"
+              *ngIf="order.state === 'cf'"
+              color="brownred"
+            >
+              Cooking
+            </ion-text>
+            <ion-text
+              class="status-text"
+              *ngIf="order.state === 'cd'"
+              color="successgreen"
+            >
+              Cooking done
+            </ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -147,7 +161,7 @@
 
 <ion-footer no-border color="whitegray">
   <ion-toolbar class="ion-text-center" color="whitegray">
-    <ion-button color="lightgray" shape="round">
+    <ion-button style="height: 32px;" color="lightgray" shape="round">
       View history
     </ion-button>
   </ion-toolbar>

@@ -1,25 +1,31 @@
 <ion-content>
-  <ion-icon
-    (click)="closeModal()"
-    color="lightgray"
-    style="z-index: 2; position: fixed; top: 8px; left: 8px; font-size: 24pt; opacity: 0.8;"
-    name="close-circle"
-  ></ion-icon>
-  <ion-toolbar
-    style="z-index: 1; padding-left: 10%;"
-    class="ion-padding shadow-box"
-  >
-    <div>
+  <ion-toolbar class="ion-padding shadow-box">
+    <ion-icon
+    slot="start"
+      (click)="closeModal()"
+      color="lightgray"
+      style="font-size: 28pt; opacity: 0.8;"
+      name="close-circle"
+    ></ion-icon>
+    <div class="ion-padding-start ion-padding-end">
       <ion-text style="font-weight: 600;" color="darkgray"
         >{{ transformDateTime(orderDetail.dateTime) }}</ion-text
       >
       <br />
-      <ion-text style="font-size: 8pt;" color="darkgray">order ID: {{ orderDetail._id }}</ion-text>
+      <ion-text style="font-size: 8pt;" color="darkgray"
+        >order ID: {{ orderDetail._id }}</ion-text
+      >
     </div>
-    <ion-text *ngIf="orderDetail.queue != -1" style="font-size: 32pt; font-weight: 500;" color="gprimary" slot="end">{{ orderDetail.queue }}</ion-text>
+    <ion-text
+      *ngIf="orderDetail.queue != -1"
+      style="font-size: 32pt; font-weight: 500;"
+      color="gprimary"
+      slot="end"
+      >{{ orderDetail.queue }}</ion-text
+    >
   </ion-toolbar>
 
-  <ion-toolbar style="z-index: 1;" class="ion-margin-bottom ion-padding-start">
+  <ion-toolbar class="ion-margin-bottom ion-padding-start">
     <ion-avatar
       class="ion-margin-end"
       style="width: 20%; height: auto;"
@@ -39,7 +45,10 @@
       <ion-text color="darkgray">Order summary</ion-text>
     </ion-list-header>
 
-    <ion-item *ngFor="let item of orderDetail.items" style="margin-bottom: 8px; padding-right: 8px;">
+    <ion-item
+      *ngFor="let item of orderDetail.items"
+      style="margin-bottom: 8px; padding-right: 8px;"
+    >
       <ion-img
         slot="start"
         style="width: 25%; margin-top: 8px; margin-bottom: auto;"
@@ -51,7 +60,9 @@
         >
         <br />
 
-        <ion-text *ngFor="let optionString of item.options" color="lightgray">{{ optionString }}<br /></ion-text>
+        <ion-text *ngFor="let optionString of item.options" color="lightgray"
+          >{{ optionString }}<br
+        /></ion-text>
         <br />
       </div>
       <div
@@ -71,7 +82,9 @@
       >Payment method</ion-text
     >
     <br />
-    <ion-text color="gray" class="ion-padding-start">{{ orderDetail.paymentMethod }}</ion-text>
+    <ion-text color="gray" class="ion-padding-start"
+      >{{ orderDetail.paymentMethod }}</ion-text
+    >
   </div>
 </ion-content>
 
@@ -79,10 +92,20 @@
   style="background-color: white; width: 100%;"
   class="ion-padding shadow-border"
 >
-
   <ion-toolbar style="--border-width: 0;" class="ion-no-padding ion-no-margin">
-    <ion-text slot="start" style="font-weight: bold;" color="darkgray" class="ion-padding-start">Total</ion-text>
-    <ion-text slot="end" style="font-weight: 500; font-size: 20pt; float: right;" color="gprimary">{{ totalPrice }}</ion-text>
+    <ion-text
+      slot="start"
+      style="font-weight: bold;"
+      color="darkgray"
+      class="ion-padding-start"
+      >Total</ion-text
+    >
+    <ion-text
+      slot="end"
+      style="font-weight: 500; font-size: 20pt; float: right;"
+      color="gprimary"
+      >{{ totalPrice }}</ion-text
+    >
   </ion-toolbar>
 
   <!-- Separate line -->
@@ -91,7 +114,9 @@
   ></div>
 
   <div class="ion-text-center">
-    <ion-text style="font-weight: 500;" color="darkgray">Accept this order?</ion-text>
+    <ion-text style="font-weight: 500;" color="darkgray"
+      >Accept this order?</ion-text
+    >
   </div>
   <ion-toolbar class="ion-padding-bottom ion-margin-top">
     <ion-buttons>
@@ -99,7 +124,13 @@
         class="ion-text-center"
         style="width: 35%; height: 36px; margin-left: auto; margin-right: 24px;"
       >
-        <ion-button (click)="rejectOrder()" fill="solid" shape="block" color="lightgray">No</ion-button>
+        <ion-button
+          (click)="rejectOrder()"
+          fill="solid"
+          shape="block"
+          color="lightgray"
+          >No</ion-button
+        >
         <ion-label style="position: sticky; bottom: -10px;">
           <ion-text color="danger">reject this order</ion-text>
         </ion-label>
@@ -108,7 +139,13 @@
         class="ion-text-center"
         style="width: 35%; height: 36px; margin-right: auto; margin-left: 24px;"
       >
-        <ion-button (click)="acceptOrder()" fill="solid" shape="block" color="gprimary">Yes</ion-button>
+        <ion-button
+          (click)="acceptOrder()"
+          fill="solid"
+          shape="block"
+          color="gprimary"
+          >Yes</ion-button
+        >
       </div>
     </ion-buttons>
   </ion-toolbar>
