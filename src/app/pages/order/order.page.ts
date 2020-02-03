@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { OrderConfirmationPage } from './order-confirmation/order-confirmation.page';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { OrderService } from 'src/app/services/api-caller/order/order.service';
@@ -21,7 +21,7 @@ export class OrderPage implements OnInit {
 
   constructor(
     private router: Router,
-    private modalController: ModalController,
+    private popoverController: PopoverController,
     private storage: StorageService,
     private orderService: OrderService
   ) { }
@@ -45,14 +45,17 @@ export class OrderPage implements OnInit {
     this.hasModalOpened = true;
     const order = (isToday ? this.orderList.today[index] : this.orderList.tomorrow[index]);
     const orderDetail = await this.orderService.getOrderDetail(order.orderId);
-    const modal = await this.modalController.create({
+    const popover = await this.popoverController.create({
       component: OrderConfirmationPage,
-      componentProps: { orderDetail }
+      componentProps: { orderDetail },
+      cssClass: 'update-popover'
     });
 
-    await modal.present();
+    popover.style.backgroundColor = 'rgba(0, 0, 0, 0.29)';
 
-    modal.onDidDismiss()
+    await popover.present();
+
+    popover.onDidDismiss()
       .then((ret: OverlayEventDetail<{ command: string, orderDetail: OrderDetail }>) => {
         if (ret.data.command === 'reject') {
           this.orderService.rejectOrder(ret.data.orderDetail._id);

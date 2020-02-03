@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Order, Item } from 'src/app/models/order.model';
 import { ActivityService } from 'src/app/services/api-caller/activity/activity.service';
@@ -21,9 +21,9 @@ export class ActivityPage implements OnInit {
 
   constructor(
     private router: Router,
-    private modalController: ModalController,
     private storage: StorageService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private popoverController: PopoverController,
   ) { }
 
   ngOnInit() {
@@ -46,26 +46,29 @@ export class ActivityPage implements OnInit {
     this.hasModalOpened = true;
     const order = (isToday ? this.activityList.today[index] : this.activityList.tomorrow[index]);
     const activityDetail = await this.activityService.getActivityDetail(order.orderId);
-    const modal = await this.modalController.create({
+    const popover = await this.popoverController.create({
       component: ActivityUpdationPage,
-      componentProps: { activityDetail: activityDetail[0] }
+      componentProps: { activityDetail: activityDetail[0] },
+      cssClass: 'update-popover'
     });
 
-    await modal.present();
+    popover.style.backgroundColor = 'rgba(0, 0, 0, 0.29)';
 
-    modal.onDidDismiss()
+    await popover.present();
+
+    popover.onDidDismiss()
       .then((ret: OverlayEventDetail<{ command: string, activityDetail: OrderDetail }>) => {
         if (ret.data.command === 'done') {
           this.activityService.orderDone(ret.data.activityDetail._id);
-          this.getActivityList();
         } else if (ret.data.command === 'complete') {
           this.activityService.orderComplete(ret.data.activityDetail._id);
-          this.getActivityList();
         }
-        this.hasModalOpened = false;
       })
       .catch(err => {
         console.log(err);
+      })
+      .finally(() => {
+        this.getActivityList();
         this.hasModalOpened = false;
       });
   }

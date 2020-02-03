@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { PopoverController } from '@ionic/angular';
 import { OrderDetail } from 'src/app/models/orderDetail.model';
 
 @Component({
@@ -13,7 +13,7 @@ export class OrderConfirmationPage implements OnInit {
   totalPrice = 0;
 
   constructor(
-    private modalController: ModalController,
+    private popoverController: PopoverController,
   ) { }
 
   ngOnInit() {
@@ -24,18 +24,18 @@ export class OrderConfirmationPage implements OnInit {
   }
 
   closeModal() {
-    this.modalController.dismiss();
+    this.popoverController.dismiss();
   }
 
   acceptOrder() {
-    this.modalController.dismiss({
+    this.popoverController.dismiss({
       command: 'accept',
       orderDetail: this.orderDetail
     });
   }
 
   rejectOrder() {
-    this.modalController.dismiss({
+    this.popoverController.dismiss({
       command: 'reject',
       orderDetail: this.orderDetail
     });

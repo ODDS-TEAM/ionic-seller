@@ -24,3 +24,13 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.update-popover .popover-content {
+    --min-width: 90vw !important;
+    --min-height: 80vh !important;
+    --max-width: 90vw !important;
+    --max-height: 90vh !important;
+    top: 10vh !important;
+    left: 5vw !important;
+}
