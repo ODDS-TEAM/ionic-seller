@@ -22,6 +22,6 @@ export class ItemInfo {
     foodName: string;
     numberOfItem: number;
     price: number;
-    pictureUrl: string;
+    imageUrl: string;
     specialInstruction: string;
 }
