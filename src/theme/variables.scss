@@ -115,6 +115,14 @@
   --ion-color-gprimary-shade: #0d8d89;
   --ion-color-gprimary-tint: #47b3af;
 
+  /** invert **/
+  --ion-color-invtgprimary: #ffffff;
+  --ion-color-invtgprimary-rgb: 255, 255, 255;
+  --ion-color-invtgprimary-contrast: #10a19b;
+  --ion-color-invtgprimary-contrast-rgb: 56, 128, 255;
+  --ion-color-invtgprimary-shade: rgb(214, 214, 214);
+  --ion-color-invtgprimary-tint: rgb(202, 202, 202);
+
   /** brownred **/
   --ion-color-brownred: #d84f23;
   --ion-color-brownred-rgb: 216, 79, 35;
@@ -177,6 +185,15 @@
   --ion-color-tint: var(--ion-color-gprimary-tint);
 }
 
+.ion-color-invtgprimary {
+  --ion-color-base: var(--ion-color-invtgprimary);
+  --ion-color-base-rgb: var(--ion-color-invtgprimary-rgb);
+  --ion-color-contrast: var(--ion-color-invtgprimary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-invtgprimary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-invtgprimary-shade);
+  --ion-color-tint: var(--ion-color-invtgprimary-tint);
+}
+
 .ion-color-brownred {
   --ion-color-base: var(--ion-color-brownred);
   --ion-color-base-rgb: var(--ion-color-brownred-rgb);
@@ -194,3 +211,4 @@
   --ion-color-shade: var(--ion-color-successgreen-shade);
   --ion-color-tint: var(--ion-color-successgreen-tint);
 }
+

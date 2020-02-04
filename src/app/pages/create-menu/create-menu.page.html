@@ -1,0 +1,130 @@
+<ion-header
+  style="background-color: white; box-shadow: 0px 0px 5px 0px rgba(161,161,161,1);"
+  class="ion-padding-top ion-padding-bottom"
+>
+  <ion-toolbar style="--border-width: 0;">
+    <ion-buttons class="ion-margin-start" slot="start">
+      <ion-back-button
+        color="darkgray"
+        [text]="''"
+        defaultHref="/main/menu"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-text color="darkgray" class="ion-margin-start title-header"
+      >Create Menu</ion-text
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  style="--padding-top: 10vh; --padding-start: 15vw; --padding-end: 15vw;"
+>
+  <div
+    style="background-color: var(--ion-color-whitegray-shade); width: 50vw; height: 40vw; margin-left: auto; margin-right: auto;"
+    class="ion-no-padding"
+  >
+    <ion-img style="object-fit: cover;"> </ion-img>
+    <ion-icon
+      color="darkgray"
+      style="font-size: 24pt; margin: auto 0 auto 0; float: right;"
+      name="ios-camera"
+    ></ion-icon>
+  </div>
+  <form [formGroup]="formGroup">
+    <ion-item class="ion-no-padding">
+      <ion-label color="gprimary" position="stacked">Food name</ion-label>
+      <ion-input
+        formControlName="foodName"
+        type="text"
+        inputmode="text"
+      ></ion-input>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label color="gprimary" position="stacked">Price</ion-label>
+      <ion-input
+        formControlName="price"
+        type="number"
+        inputmode="numberic"
+      ></ion-input>
+    </ion-item>
+    <ion-item style="--inner-border-width: 0;" class="ion-no-padding">
+      <ion-label
+        style="margin-bottom: 16px;"
+        color="gprimary"
+        position="stacked"
+        >Description</ion-label
+      >
+      <ion-textarea
+        formControlName="description"
+        class="ion-padding-start"
+        placeholder="Say something about your food"
+        autoGrow="true"
+      ></ion-textarea>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-label color="gprimary" position="stacked">Option</ion-label>
+
+      <!-- Iterate options -->
+      <div
+        [formGroup]="this.option"
+        *ngFor="let option of options.controls; let optionIndex=index"
+        class="row option-container"
+      >
+        <ion-input
+          formControlName="optionTitle"
+          color="darkgray"
+          type="text"
+          inputmode="text"
+          placeholder="Option title"
+        ></ion-input>
+        <ion-input
+          formControlName="optionType"
+          color="darkgray"
+          type="text"
+          inputmode="text"
+          placeholder="Option type"
+        ></ion-input>
+
+        <!-- Iterate choices -->
+        <ion-toolbar
+          [formGroup]="this.choice"
+          *ngFor="let choice of getChoices(optionIndex).controls; let choiceIndex=index"
+          class="ion-no-padding"
+        >
+          <ion-input
+            formControlName="choiceTitle"
+            color="darkgray"
+            slot="start"
+            type="text"
+            inputmode="text"
+            placeholder="Choice title"
+            style="flex: 4 !important; margin-right: 4px;"
+            class="ion-no-margin"
+          ></ion-input>
+          <ion-input
+            formControlName="choicePrice"
+            style="--padding-start: 0;"
+            color="darkgray"
+            type="number"
+            inputmode="numeric"
+            class="ion-no-margin"
+            >&nbsp;+</ion-input
+          >
+          <ion-text slot="end" color="darkgray">&nbsp;฿</ion-text>
+        </ion-toolbar>
+
+        <ion-toolbar>
+          <ion-icon
+            (click)="addChoice(optionIndex)"
+            slot="end"
+            style="font-size: 18pt;"
+            color="gprimary"
+            name="add-circle"
+          ></ion-icon>
+        </ion-toolbar>
+      </div>
+    </ion-item>
+  </form>
+  <ion-button (click)="addOption()">Add option</ion-button>
+  <ion-button (click)="logForm()">Log</ion-button>
+</ion-content>

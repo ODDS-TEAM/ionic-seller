@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'register-store',
     loadChildren: () => import('./pages/auth/register-store/register-store.module').then( m => m.RegisterStorePageModule)
   },
+  {
+    path: 'create-menu',
+    loadChildren: () => import('./pages/create-menu/create-menu.module').then( m => m.CreateMenuPageModule)
+  },
 ];
 @NgModule({
   imports: [

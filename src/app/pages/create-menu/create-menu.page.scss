@@ -1,0 +1,23 @@
+.title-header {
+  text-align: left;
+  font-family: helvetica !important;
+  font-weight: 400;
+  font-size: 16pt;
+}
+
+.row {
+  width: 100%;
+}
+
+.option-container ion-input {
+  --background: var(--ion-color-whitegray-shade);
+  --padding-start: 8px;
+  border-radius: 32px;
+  margin: 4px 0;
+}
+
+ion-textarea {
+  border: 1px solid gray;
+  --border-radius: 8px;
+  border-radius: 8px;
+}

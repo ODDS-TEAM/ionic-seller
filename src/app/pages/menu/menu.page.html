@@ -1,3 +1,84 @@
-<ion-content>
-  <ion-text>Under development</ion-text>
+<ion-header>
+  <ion-toolbar style="padding-top: 14px;"> </ion-toolbar>
+  <ion-toolbar style="padding-bottom: 14px;">
+    <ion-text
+      color="darkgray"
+      class="header-title ion-margin-start ion-margin-bottom"
+      >Menu</ion-text
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="whitegray">
+  <ion-toolbar style="--padding-start: 16px;" color="whitegray">
+    <ion-label color="gray">All menu</ion-label>
+  </ion-toolbar>
+
+  <!-- Iterate items -->
+  <ion-item class="ion-margin-bottom">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-align-items-center">
+        <ion-col
+          size="4"
+          class="ion-no-padding ion-margin-top ion-margin-bottom"
+        >
+          <ion-img
+            style="object-fit: cover; height: 80px;"
+            [src]="'https://www.mazopiya.com/wp-content/uploads/2019/11/Around-the-World-Asia-1024x702.jpg'"
+          ></ion-img>
+        </ion-col>
+        <ion-col
+          class="ion-padding-start"
+          size="5"
+          style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+        >
+          <ion-text style="font-weight: 600;" color="darkgray"
+            >ชื่ออาหารยาวมากเลยนะ</ion-text
+          >
+        </ion-col>
+        <ion-col size="3">
+          <ion-text style="font-weight: 700;" color="darkgray">30</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <!-- Iterate items -->
+  <ion-item class="ion-margin-bottom">
+      <ion-grid class="ion-no-padding">
+        <ion-row class="ion-align-items-center">
+          <ion-col
+            size="4"
+            class="ion-no-padding ion-margin-top ion-margin-bottom"
+          >
+            <ion-img
+              style="object-fit: cover; height: 80px;"
+              [src]="'https://www.mazopiya.com/wp-content/uploads/2019/11/Around-the-World-Asia-1024x702.jpg'"
+            ></ion-img>
+          </ion-col>
+          <ion-col
+            class="ion-padding-start"
+            size="5"
+            style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+          >
+            <ion-text style="font-weight: 600;" color="darkgray"
+              >ชื่ออาหารยาวมากเลยนะ</ion-text
+            >
+          </ion-col>
+          <ion-col size="3">
+            <ion-text style="font-weight: 700;" color="darkgray">30</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    style="overflow: visible;"
+  >
+    <ion-fab-button (click)="openCreateMenuModal()" color="invtgprimary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
