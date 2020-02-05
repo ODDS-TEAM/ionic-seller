@@ -1,6 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>ลงทะเบียน</ion-title>
+<ion-header no-border class="ion-justify-content-center header-container">
+  <ion-toolbar class="ion-padding" style="--margin-top: auto; --margin-bottom: auto; --min-height: 20vh;">
+    <ion-back-button slot="start" color="gprimary" [text]="''" defaultHref="/"></ion-back-button>
+    <ion-text class="title-text">Register</ion-text>
   </ion-toolbar>
 </ion-header>
 
@@ -9,27 +10,31 @@
     <ion-row class="ion-align-items-center">
       <ion-col>
         <form [formGroup]="credentialsForm" (ngSubmit)="onClickNext()">
-          <ion-item>
-            <ion-label position="stacked">อีเมลล์</ion-label>
-            <ion-input required type="email" formControlName="email"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">ชื่อผู้ใช้</ion-label>
-            <ion-input required type="text" formControlName="username"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">รหัสผ่าน</ion-label>
-            <ion-input required type="password" formControlName="password"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">ยืนยันรหัสผ่าน</ion-label>
-            <ion-input required type="password" formControlName="confirmPassword"></ion-input>
-          </ion-item>
-          <div class="row ion-padding ion-text-center">
-            <ion-button type="submit" [disabled]="!credentialsForm.valid" size="large" color="success" shape="round">
-              <ion-icon name="arrow-round-forward"></ion-icon>
-            </ion-button>
-          </div>
+          <ion-list>
+            <ion-item class="ion-padding-start ion-padding-end">
+              <ion-label position="stacked" color="gprimary">Email</ion-label>
+              <ion-input required inputmode="email" type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item class="ion-padding-start ion-padding-end">
+              <ion-label position="stacked" color="gprimary">Password</ion-label>
+              <ion-input required inputmode="password" type="password" formControlName="password"></ion-input>
+            </ion-item>
+            <ion-item class="ion-padding-start ion-padding-end ion">
+              <ion-label position="stacked" color="gprimary">Confirm password</ion-label>
+              <ion-input required inputmode="password" type="password" formControlName="confirmPassword"></ion-input>
+            </ion-item>
+            <ion-toolbar class="ion-margin-top ion-margin-bottom ion-text-center">
+              <ion-button [disabled]="!credentialsForm.valid" type="submit" class="ion-margin-top submit-button"
+                shape="round">
+                <span style="display: inline-block; vertical-align: middle;">
+                  <ion-text style="vertical-align: middle; font-weight: bold;">
+                    Continue
+                    <ion-icon class="icon" name="ios-arrow-dropright" style="display:inline-block;"></ion-icon>
+                  </ion-text>
+                </span>
+              </ion-button>
+            </ion-toolbar>
+          </ion-list>
         </form>
       </ion-col>
     </ion-row>

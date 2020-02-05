@@ -1,40 +1,56 @@
-<ion-content>
-  <ion-grid class="ion-padding" style="height: 100%;">
-    <ion-row class="ion-justify-content-center ion-align-items-center" style="height: 100%;">
-      <ion-col class="ion-justify-content-center ion-align-text-center">
-        <div class="row">
-          <ion-img [src]="'../../assets/images/logo.png'"
-            style="display: block; margin-left: auto; margin-right: auto; width: 30%;"></ion-img>
-        </div>
-        <form [formGroup]="credentialsForm" (ngSubmit)="onClickLogin()" class="ion-text-center">
-          <ion-item>
-            <ion-label position="stacked">ชื่อผู้ใช้</ion-label>
-            <ion-input required formControlName="username" type="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">รหัสผ่าน</ion-label>
-            <ion-input required formControlName="password" type="password"></ion-input>
-          </ion-item>
-          <ion-toolbar class="ion-padding">
-            <ion-buttons class="ion-justify-content-center">
-              <ion-button [disabled]="!credentialsForm.valid" expand="block" fill="outline" size="small"
-                class="ion-margin" type="submit">
-                <p>ลงชื่อเข้าใช้</p>
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
+<ion-content class="ion-no-padding">
+  <ion-grid class="ion-padding container" style="height: 100%;">
+    <ion-row class="ion-align-items-center" style="width: 100%; height: 50%;">
+      <ion-col
+        class="ion-justify-content-center ion-text-center"
+        style="width: 100%;"
+      >
+        <h1 style="color: white;" class="ion-align-self-center">SEC<br>Kin Kao<br>Merchant</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row style="width: 100%; height: 50%;">
+      <ion-col
+        class="ion-padding ion-justify-content-center ion-text-cetner"
+        style="width: 100%;"
+      >
+        <form
+          [formGroup]="credentialsForm"
+          class="ion-align-items-center ion-text-center"
+          (ngSubmit)="onClickLogin()"
+        >
+          <ion-input
+            formControlName="email"
+            placeholder="Email"
+            type="text"
+          ></ion-input>
+          <ion-input
+            formControlName="password"
+            class="ion-margin-top"
+            placeholder="Password"
+            type="password"
+          ></ion-input>
+          <ion-button
+            color="light"
+            [disabled]="!credentialsForm.valid"
+            class="ion-margin-top"
+            shape="round"
+            type="submit"
+            >Login</ion-button
+          >
         </form>
-        <div class="row ion-align-text-center">
-          <p class="text-center">ไม่สามารถลงชื่อเข้าใช้ได้. <a>ลืมรหัสผ่าน</a></p>
-        </div>
-        <div style="margin: 32px;" class="row ion-margin-top text-center">
-          <ion-toolbar>
-            <ion-button (click)="onClickRegister()" expand="full" size="small" color="warning">
-              <p>ลงทะเบียน</p>
-            </ion-button>
-          </ion-toolbar>
-        </div>
+        <ion-button (click)="goToTab()">Goto main</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer no-border class="ion-text-center">
+  <span style="display: inline-block; vertical-align: middle;">
+    <p style="vertical-align: middle; font-weight: bold;" (click)="onClickRegister()">
+      Create an account  <ion-icon
+      class="icon"
+        name="ios-arrow-dropright"
+        style="display:inline-block;"
+      ></ion-icon></p
+  ></span>
+</ion-footer>

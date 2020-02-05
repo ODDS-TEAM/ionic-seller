@@ -1,0 +1,24 @@
+.title-text {
+  display: block;
+  font-family: "Arial Rounded MT Bold" !important;
+  font-size: x-large;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.header-container {
+  height: 20vh;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ion-button {
+  width: 75%;
+  height: 36px;
+  --background: linear-gradient(270deg, #4bdb9d, #40b8ad);
+  --background-activated: linear-gradient(270deg, #75daae, #73b9b4);
+}

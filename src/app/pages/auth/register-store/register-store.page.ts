@@ -262,17 +262,20 @@ export class RegisterStorePage implements OnInit {
     });
     await loading.present();
 
-    fetch('http://6869c035.ngrok.io/uploadStore', {
-      method: 'POST',
-      body: formData,
-    }).then(response => {
-        this.presentToast('File upload complete.');
+    this.http.request('POST', '', {
+      observe: 'response',
+      body: formData
+    }).subscribe(
+      res => {
+        this.presentToast('Register complete');
+        console.log(res);
         loading.dismiss();
-    }).catch(err => {
-      this.presentToast('File upload fail on http');
-      console.log(err);
-      loading.dismiss();
-    });
+      }, err => {
+        this.presentToast('File upload fail on http protocol');
+        console.log(err);
+        loading.dismiss();
+      }
+    );
 
     // this.http.post(
     //   'http://6869c035.ngrok.io/uploadStore',

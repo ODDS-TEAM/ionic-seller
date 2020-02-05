@@ -1,6 +1,7 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>ลงทะเบียน</ion-title>
+<ion-header no-border class="ion-justify-content-center header-container">
+  <ion-toolbar class="ion-padding" style="--margin-top: auto; --margin-bottom: auto; --min-height: 15vh;">
+      <ion-back-button slot="start" color="gprimary" [text]="''" defaultHref="/register"></ion-back-button>
+    <ion-text class="title-text">Edit profile</ion-text>
   </ion-toolbar>
 </ion-header>
 
@@ -8,37 +9,15 @@
   <ion-grid class="ion-padding" style="height: 100%;">
     <ion-row class="ion-align-items-center">
       <ion-col>
-        <div class="row ion-padding ion-text-center">
-          <ion-button (click)="gotoTabs()" size="small">
-            <p>ไปหน้าอื่นก่อนนะ ยังอัพโหลดไม่ได้</p>
-          </ion-button>
+        <div style="box-sizing: border-box; margin-left: auto; margin-right: auto; width: 36vw; height: 36vw;">
+          <ion-avatar (click)="selectImage()" style="width: 36vw; height: 36vw;">
+            <ion-img [src]="imagePath"></ion-img>
+          </ion-avatar>
+          <ion-icon color="darkgray" style="position: absolute; left: 54vw; top: 28vw; font-size: xx-large;" name="ios-camera"></ion-icon>
         </div>
         <form [formGroup]="storeForm" (ngSubmit)="onClickConfirm()">
-          <div class="row ion-padding ion-text-center">
-            <ion-button
-              (click)="selectImage()"
-              size="large"
-              color="success"
-              shape="round"
-            >
-              <p>อัพโหลดรูปภาพ</p>
-            </ion-button>
-            <ion-button
-              (click)="startUpload()"
-              size="small"
-              color="warning"
-              shape="round"
-            >
-              <p>กดเพื่ออัพโหลด</p>
-            </ion-button>
-          </div>
-          <div class="row ion-padding ion-text-center" >
-            <ion-avatar (click)="selectImage()" style="display: block; margin-left: auto; margin-right: auto; width: 70px; height: 70px;">
-              <ion-img [src]="imagePath"></ion-img>
-            </ion-avatar>
-          </div>
           <ion-item>
-            <ion-label position="stacked">ชื่อร้าน</ion-label>
+            <ion-label color="gprimary" position="stacked">Restaurant name</ion-label>
             <ion-input
               required
               type="text"
@@ -46,7 +25,7 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">ชื่อเจ้าของร้าน</ion-label>
+            <ion-label color="gprimary" position="stacked">Owner name</ion-label>
             <ion-input
               required
               type="text"
@@ -54,7 +33,7 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
+            <ion-label color="gprimary" position="stacked">Phone number</ion-label>
             <ion-input
               required
               type="text"
@@ -62,24 +41,23 @@
             ></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">คำอธิบาย</ion-label>
+            <ion-label color="gprimary" position="stacked">Description</ion-label>
             <ion-input
               required
               type="text"
               formControlName="describe"
             ></ion-input>
           </ion-item>
-          <div class="row ion-padding ion-text-center">
-            <ion-button
-              type="submit"
-              [disabled]="!storeForm.valid"
-              size="large"
-              color="success"
-              shape="round"
-            >
-              <ion-icon name="checkmark"></ion-icon>
+          <ion-toolbar class="ion-margin-top ion-margin-bottom ion-text-center">
+            <ion-button [disabled]="!storeForm.valid" type="submit" class="ion-margin-top submit-button"
+              shape="round">
+              <span style="display: inline-block; vertical-align: middle;">
+                <ion-text style="vertical-align: middle; font-weight: bold;">
+                  Complete
+                </ion-text>
+              </span>
             </ion-button>
-          </div>
+          </ion-toolbar>
         </form>
       </ion-col>
     </ion-row>

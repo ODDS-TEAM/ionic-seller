@@ -23,7 +23,7 @@ export class RegisterPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'รูปแบบไม่ถูกต้อง',
       // subHeader: 'Subittle',
-      message: message,
+      message,
       buttons: ['ตกลง'],
     });
 
@@ -33,46 +33,43 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.credentialsForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required, Validators.minLength(1)]],
       password: ['', [Validators.required, Validators.minLength(1)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(1)]]
     });
 
     this.credentialsForm.setValue({
       email: 'tm@odds.team',
-      username: 'teema',
       password: '123',
       confirmPassword: '123',
-    })
+    });
   }
 
   onClickNext() {
     console.log('click next');
     const formValues = this.credentialsForm.value;
     const email = formValues.email;
-    const username = formValues.username;
     const password = formValues.password;
     const confirmPassword = formValues.confirmPassword;
 
-    let alertMessage = "";
+    let alertMessage = '';
     let isValid = true;
 
-    if (confirmPassword != password) {
-      alertMessage += "กรอกรหัสผ่านไม่ตรงกัน ";
+    if (confirmPassword !== password) {
+      alertMessage += 'กรอกรหัสผ่านไม่ตรงกัน ';
       isValid = false;
     }
 
-    if (isValid)
+    if (isValid) {
       this.router.navigate(['register-store'], {
         replaceUrl: true,
         queryParams: {
-          email: email,
-          username: username,
-          password: password,
+          email,
+          password,
         }
       });
-    else
+    } else {
       this.presentAlert(alertMessage);
+    }
   }
 
 }

@@ -1,3 +1,35 @@
-.text-center { 
-    text-align: center;
+.container {
+  background-image: linear-gradient(#4bdb9d, #40b8ad);
+}
+
+ion-footer {
+  color: white;
+  background-color: #40b8ad;
+  box-shadow: 0px -20px 50px 10px #40b8ad;
+}
+
+ion-input {
+  background-color: white;
+  border-radius: 128px;
+  text-align: left !important;
+  padding-left: 16px !important;
+  color: gray;
+  height: 36px;
+  font-size: 10pt;
+}
+
+ion-button {
+  background-color: #ffffffff !important;
+  border-radius: 128px;
+  height: 32px;
+  color: azure;
+}
+
+form {
+  padding: 32px;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
 }

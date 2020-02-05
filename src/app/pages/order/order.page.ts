@@ -75,7 +75,7 @@ export class OrderPage implements OnInit {
   async getOrderList(event?) {
     try {
       this.isLoading = true;
-      const uid = await this.storage.getUid();
+      const uid = (await this.storage.getUserInfo()).uid;
       this.orderList = await this.orderService.getOrderList(uid);
       this.isLoading = false;
       if (event) {
