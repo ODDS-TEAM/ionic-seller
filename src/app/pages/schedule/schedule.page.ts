@@ -27,4 +27,6 @@ export class SchedulePage implements OnInit {
     this.listMenusForFri = this.listMenus.days[3].stores[0].menus;
   }
 
+  
+
 }

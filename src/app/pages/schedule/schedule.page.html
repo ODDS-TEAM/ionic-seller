@@ -1,63 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>รายการอาหารประจำสัปดาห์</ion-title>
+  <ion-toolbar style="padding-top: 14px;"> </ion-toolbar>
+  <ion-toolbar style="padding-bottom: 14px;">
+    <ion-text
+      color="darkgray"
+      class="header-title ion-margin-start ion-margin-bottom"
+      >Food schedule</ion-text
+    >
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        จันทร์
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForMon" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        อังคาร
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForTue" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create" *ngIf="listMenusForTue.length != 0"></ion-icon>
-            <ion-icon slot="icon-only" name="add"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        พฤหัสบดี
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForThu" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        ศุกร์
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForFri" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content color="whitegray">
+
+  <!-- Monday -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="darkgray">Monday</ion-label>
+    </ion-list-header>
+
+  </ion-list>
+
+  <!-- Tuesday -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="darkgray">Tuesday</ion-label>
+    </ion-list-header>
+  </ion-list>
 </ion-content>

@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/create-menu/create-menu.module').then( m => m.CreateMenuPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
+  },
 ];
 @NgModule({
   imports: [

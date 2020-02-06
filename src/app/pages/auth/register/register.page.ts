@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { throwError } from 'rxjs';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
+    private auth: AuthService
   ) { }
 
   async presentAlert(message: string) {
@@ -36,16 +38,9 @@ export class RegisterPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(1)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(1)]]
     });
-
-    this.credentialsForm.setValue({
-      email: 'tm@odds.team',
-      password: '123',
-      confirmPassword: '123',
-    });
   }
 
-  onClickNext() {
-    console.log('click next');
+  async onClickNext() {
     const formValues = this.credentialsForm.value;
     const email = formValues.email;
     const password = formValues.password;
@@ -59,6 +54,11 @@ export class RegisterPage implements OnInit {
       isValid = false;
     }
 
+    if (!await this.auth.checkEmailExistant(email)) {
+      this.presentAlert('อีเมลล์นี้มีผู้ใช้งานอยู่แล้ว');
+      return;
+    }
+
     if (isValid) {
       this.router.navigate(['register-store'], {
         replaceUrl: true,
@@ -69,6 +69,7 @@ export class RegisterPage implements OnInit {
       });
     } else {
       this.presentAlert(alertMessage);
+      return;
     }
   }
 
