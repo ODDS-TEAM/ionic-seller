@@ -87,6 +87,22 @@ export class ActivityPage implements OnInit {
     }
   }
 
+  getStateText(state: string) {
+    switch (state) {
+      case 'cf': return 'Confirmed';
+      case 'cd': return 'Ready for deliver';
+      default: return 'State error';
+    }
+  }
+
+  getStateColor(state: string) {
+    switch (state) {
+      case 'cf': return 'brownred';
+      case 'cd': return 'successgreen';
+      default: return 'danger';
+    }
+  }
+
   calcNumberOfFood(items: Item[]) {
     let sum = 0;
     for (const item of items) {

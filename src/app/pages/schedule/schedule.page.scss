@@ -34,8 +34,12 @@
 ion-list-header {
   background-color: transparent;
   font-weight: bold;
-  font-size: 10pt;
+  font-size: larger;
   letter-spacing: normal;
   font-family: helvetica !important;
   text-transform: none;
+}
+
+ion-item {
+  --inner-border-width: 0;
 }

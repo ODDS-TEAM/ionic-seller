@@ -10,7 +10,7 @@ import { WEB_SERVICE_URL } from '../../webServiceVariable';
 })
 export class OrderService {
 
-  private ORDER_MAIN_URL = `${WEB_SERVICE_URL}merchant/food/order`;
+  private ORDER_MAIN_URL = `${WEB_SERVICE_URL}/merchant/food/order`;
   private ORDER_DETAIL_URL = this.ORDER_MAIN_URL + '/detail';
   private ORDER_REJECT_URL = this.ORDER_MAIN_URL + '/cancel';
   private ORDER_ACCEPT_URL = this.ORDER_MAIN_URL + '/confirm';
@@ -19,7 +19,7 @@ export class OrderService {
 
   acceptOrder(orderId: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.http.request('POST', `${WEB_SERVICE_URL}/${this.ORDER_ACCEPT_URL}/${orderId}`,
+      this.http.request('POST', `${this.ORDER_ACCEPT_URL}/${orderId}`,
         {
           observe: 'response',
         })
@@ -40,7 +40,7 @@ export class OrderService {
 
   rejectOrder(orderId: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.http.request('POST', `${WEB_SERVICE_URL}/${this.ORDER_REJECT_URL}/${orderId}`,
+      this.http.request('POST', `${this.ORDER_REJECT_URL}/${orderId}`,
         {
           observe: 'response',
         })
@@ -60,7 +60,7 @@ export class OrderService {
 
   getOrderList(merchantId: string): Promise<{ today: Order[], tomorrow: Order[] }> {
     return new Promise((resolve, reject) => {
-      this.http.request<Order[]>('GET', `${WEB_SERVICE_URL}/${this.ORDER_MAIN_URL}/${merchantId}`, { observe: 'response' })
+      this.http.request<Order[]>('GET', `${this.ORDER_MAIN_URL}/${merchantId}`, { observe: 'response' })
         .subscribe(
           res => {
             const now = new Date();
@@ -101,7 +101,7 @@ export class OrderService {
 
   getOrderDetail(orderId: string): Promise<OrderDetail> {
     return new Promise((resolve, reject) => {
-      this.http.request('GET', `${WEB_SERVICE_URL}/${this.ORDER_DETAIL_URL}/${orderId}`)
+      this.http.request('GET', `${this.ORDER_DETAIL_URL}/${orderId}`)
         .subscribe(
           (orderDetail: OrderDetail) => {
             orderDetail.dateTime = new Date(orderDetail.dateTime);

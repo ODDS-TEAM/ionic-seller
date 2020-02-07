@@ -27,13 +27,14 @@ export class LoginPage implements OnInit {
       email: ['', [Validators.required, Validators.minLength(1)]],
       password: ['', [Validators.required, Validators.minLength(1)]]
     });
+    this.reLogin();
   }
 
   async reLogin() {
     this.authService.relogin()
       .then((res: boolean) => {
         if (res) {
-          this.router.navigate(['/main/order']);
+          this.router.navigate(['/main/menu']);
         }
       })
       .catch(err => {

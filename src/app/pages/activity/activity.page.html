@@ -20,7 +20,7 @@
       pullFactor="0.5"
       pullMin="100"
       pullMax="100"
-      pullingIcon="null"
+      pullingIcon="undefined"
       refreshingSpinner="circles"
       refreshingText="Refreshing"
     >
@@ -43,22 +43,22 @@
     <ion-item
       *ngFor="let order of activityList.today; let i=index"
       (click)="openUpdateModal(i, true)"
-      style="margin-bottom: 8px;"
+      style="margin-bottom: 8px; overflow: hidden;"
       class="ion-no-padding"
     >
-      <ion-grid>
-        <ion-row class="ion-align-items-center">
+      <ion-grid style="overflow: hidden;">
+        <ion-row style="overflow: hidden;" class="ion-align-items-center">
           <ion-col
             size="2"
             class="ion-align-items-center ion-justify-content-center"
-            style="height: 100%; padding-left: 12px;"
+            style="height: 100%; padding-left: 8px;"
           >
             <ion-avatar class="ion-align-self-center" style="margin: auto;">
-              <ion-img [src]="order.customerImageUrl"></ion-img>
+              <ion-img style="object-fit: cover;" [src]="order.customerImageUrl"></ion-img>
             </ion-avatar>
           </ion-col>
           <ion-col
-            size="7"
+            size="6"
             class="ion-padding-start ion-padding-end"
             style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
           >
@@ -72,12 +72,11 @@
             <br />
             <ion-text
               color="darkgray"
-              style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
             >
               {{ joinFoodName(order.items) }}
             </ion-text>
           </ion-col>
-          <ion-col size="3" class="ion-text-center">
+          <ion-col size="4" class="ion-text-center">
             <ion-text
               color="gprimary"
               style="font-weight: 500; font-size: 20pt;"
@@ -86,72 +85,10 @@
             <br />
             <ion-text
               class="status-text"
-              *ngIf="order.state === 'cf'"
-              color="brownred"
+              color="{{getStateColor(order.state)}}"
             >
-              Cooking
+              {{ getStateText(order.state) }}
             </ion-text>
-            <ion-text
-              class="status-text"
-              *ngIf="order.state === 'cd'"
-              color="successgreen"
-            >
-              Cooking done
-            </ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </ion-list>
-
-  <ion-list *ngIf="activityList.tomorrow.length != 0" class="ion-no-margin">
-    <ion-list-header>
-      <ion-text class="list-header" color="gprimary">Today</ion-text>
-    </ion-list-header>
-
-    <ion-item
-      *ngFor="let order of activityList.tomorrow; let i=index"
-      (click)="openUpdateModal(i, true)"
-      style="margin-bottom: 8px;"
-      class="ion-no-padding"
-    >
-      <ion-grid>
-        <ion-row class="ion-align-items-center">
-          <ion-col
-            size="2"
-            class="ion-align-items-center ion-justify-content-center"
-            style="height: 100%; padding-left: 12px;"
-          >
-            <ion-avatar class="ion-align-self-center" style="margin: auto;">
-              <ion-img [src]="order.customerImageUrl"></ion-img>
-            </ion-avatar>
-          </ion-col>
-          <ion-col
-            size="8"
-            class="ion-padding-start ion-padding-end"
-            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-          >
-            <ion-text color="darkgray" style="font-weight: bold;">
-              {{ order.customerName }}
-            </ion-text>
-            <br />
-            <ion-text color="darkgray">
-              {{ calcNumberOfFood(order.items) }} รายการ
-            </ion-text>
-            <br />
-            <ion-text
-              color="darkgray"
-              style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-            >
-              {{ joinFoodName(order.items) }}
-            </ion-text>
-          </ion-col>
-          <ion-col size="2" class="ion-text-center">
-            <ion-text
-              color="gprimary"
-              style="font-weight: 500; font-size: 20pt;"
-              >{{ order.queue }}</ion-text
-            >
           </ion-col>
         </ion-row>
       </ion-grid>

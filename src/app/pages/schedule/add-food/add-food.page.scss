@@ -1,0 +1,12 @@
+ion-item {
+  --inner-border-width: 0;
+  --background-activated: rgba(220, 255, 247, 0.4);
+}
+
+.foodleft-input {
+  border: 1px solid gray;
+  border-radius: 8px;
+  width: 70%;
+  font-weight: bold;
+  color: var(--ion-color-darkgray);
+}

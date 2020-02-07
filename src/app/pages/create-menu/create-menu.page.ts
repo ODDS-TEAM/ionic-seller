@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Plugins, CameraResultType } from '@capacitor/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+
+import { FoodMenuDetail } from '../../models/menuDetail.model';
+import { MenuService } from 'src/app/services/api-caller/menu/menu.service';
 
 const { Camera } = Plugins;
 
@@ -21,7 +23,8 @@ export class CreateMenuPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private navControl: NavController
+    private navControl: NavController,
+    private menuService: MenuService
   ) { }
 
   ngOnInit() {
@@ -31,24 +34,23 @@ export class CreateMenuPage implements OnInit {
 
     this.formGroup = this.formBuilder.group({
       foodName: [''],
-      price: [''],
+      price: ['', Validators.min(1)],
       description: [''],
       options: this.formBuilder.array([
         this.formBuilder.group({
-          optionTitle: [''],
-          optionType: [''],
+          titleOption: [''],
+          singleChoice: [''],
           choices: this.formBuilder.array([
             this.formBuilder.group({
-              choiceTitle: [''],
-              choicePrice: ['']
+              titleChoice: [''],
+              priceChoice: ['', Validators.min(0)]
             })
           ])
         })
       ])
     });
 
-    this.getChoices(0).at(0).get('choicePrice').setValue('0');
-    console.log(this.formGroup);
+    this.getChoices(0).at(0).get('priceChoice').setValue('0');
   }
 
   get options() {
@@ -61,13 +63,13 @@ export class CreateMenuPage implements OnInit {
 
   addOption() {
     const group = this.formBuilder.group({
-      choiceTitle: [''],
-      choicePrice: ['']
+      titleChoice: [''],
+      priceChoice: ['', Validators.min(0)]
     });
-    group.controls.choicePrice.setValue('0');
+    group.controls.priceChoice.setValue('0');
     this.options.push(this.formBuilder.group({
-      optionTitle: [''],
-      optionType: [''],
+      titleOption: [''],
+      singleChoice: [''],
       choices: this.formBuilder.array([
         group
       ])
@@ -76,10 +78,10 @@ export class CreateMenuPage implements OnInit {
 
   addChoice(optionIndex: number) {
     const group = this.formBuilder.group({
-      choiceTitle: [''],
-      choicePrice: ['']
+      titleChoice: [''],
+      priceChoice: ['', Validators.min(0)]
     });
-    group.controls.choicePrice.setValue('0');
+    group.controls.priceChoice.setValue('0');
     this.getChoices(optionIndex).push(group);
   }
 
@@ -91,45 +93,33 @@ export class CreateMenuPage implements OnInit {
     });
 
     this.currentImageUrl = image.dataUrl;
-    console.log(this.currentImageUrl);
   }
 
   async createMenu() {
-    const formData = new FormData();
-
-    const mimeType = this.currentImageUrl.split(',')[0].split(';')[0].split(':')[1];
-    const data = this.currentImageUrl.split(',')[1];
-    console.log({mimeType, data});
-
-    const fileName = Date.now().toString();
-
-    const byte = atob(data);
-    const ab = new ArrayBuffer(byte.length);
-    const ia = new Uint8Array(ab);
-
-    for (let i = 0; i < byte.length; i++) {
-      ia[i] = byte.charCodeAt(i);
+    const value: FoodMenuDetail = this.formGroup.value;
+    for (const option of value.options) {
+      option.singleChoice = option.singleChoice === 'true';
     }
 
-    const imgBlob = new Blob([ab], { type: mimeType});
+    try {
+      const food = await this.menuService.createMenu(value);
+      const mimeType = this.currentImageUrl.split(',')[0].split(';')[0].split(':')[1];
+      const data = this.currentImageUrl.split(',')[1];
 
-    formData.append('imgRaw', imgBlob, fileName);
+      const byte = atob(data);
+      const ab = new ArrayBuffer(byte.length);
+      const ia = new Uint8Array(ab);
 
-    formData.append('foodName', this.formGroup.value.foodName);
-    formData.append('price', this.formGroup.value.price);
-    formData.append('description', this.formGroup.value.description);
-    formData.append('options', JSON.stringify(this.formGroup.value.options));
-
-    this.http.request('POST', 'http://localhost:3000/uploadStore', {
-      observe: 'response',
-      body: formData
-    }).subscribe(
-      res => {
-        this.navControl.back();
-      }, err => {
-        console.log(err);
+      for (let i = 0; i < byte.length; i++) {
+        ia[i] = byte.charCodeAt(i);
       }
-    );
+
+      const imgBlob = new Blob([ab], { type: mimeType });
+
+      await this.menuService.uploadMenuImage(food._id, imgBlob);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   logForm() {

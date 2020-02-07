@@ -1,1 +1,1 @@
-export const WEB_SERVICE_URL = 'https://31bbc026.ngrok.io';
+export const WEB_SERVICE_URL = 'http://192.168.1.157:3000';

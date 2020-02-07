@@ -42,7 +42,7 @@ export class ActivityService {
               }
 
               this.eventBadge.updateActivityNumber(res.body.length);
-
+              console.log(today);
               resolve({ today, tomorrow });
             } else {
               reject(res);

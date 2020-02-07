@@ -17,7 +17,6 @@ export class OrderConfirmationPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.orderDetail);
     this.orderDetail.items.forEach(item => {
       this.totalPrice += item.price * item.numberOfItem;
     });
