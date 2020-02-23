@@ -16,6 +16,15 @@
   margin: 4px 0;
 }
 
+.option-container ion-select {
+  background-color: var(--ion-color-whitegray-shade);
+  --background: var(--ion-color-whitegray-shade);
+  --padding-start: 8px;
+  border-radius: 32px;
+  margin: 4px 0;
+  max-width: 100%;
+}
+
 ion-textarea {
   border: 1px solid gray;
   --border-radius: 8px;

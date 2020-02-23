@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { StorageService } from './services/storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +14,6 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
-    ,private storageService: StorageService
   ) {
     this.initializeApp();
   }
@@ -25,8 +23,5 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.storageService.setFakeUserInfo()
-      .then(() => console.log('Setting fake user info completely'))
-      .catch(() => console.log('Fail to set fake user info'));
   }
 }

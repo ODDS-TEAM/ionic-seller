@@ -1,0 +1,65 @@
+<ion-header style="height: 10vh;" (click)="closeModal()">
+  <ion-toolbar class="ion-padding" style="--border-width: 0;">
+    <ion-label
+      slot="start"
+      color="darkgray"
+      style="font-size: large; font-weight: bold;"
+      >Select menu</ion-label
+    >
+    <ion-icon
+      slot="end"
+      name="close-circle"
+      color="lightgray"
+      style="font-size: xx-large;"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list style="height: 50vh; overflow: scroll;">
+    <ion-radio-group (ionChange)="onSelect($event, i)">
+      <ion-item
+        [disabled]="shouldDisabled(i)"
+        class="ion-no-padding ion-padding-start ion-padding-end"
+        *ngFor="let menu of menuList; let i=index"
+      >
+        <ion-radio *ngIf="shouldBeChecked(i)" slot="end" value="{{i}}" checked></ion-radio>
+        <ion-radio *ngIf="!shouldBeChecked(i)" slot="end" value="{{i}}"></ion-radio>
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="6">
+              <ion-img
+                style="height: 80px; object-fit: cover;"
+                [src]="menu.imageUrl"
+              ></ion-img>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text color="darkgray" style="font-weight: bold;">
+                {{ menu.foodName }}
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar
+    [formGroup]="fg"
+    class="ion-padding-start ion-padding-end"
+    style="--border-width: 0;"
+  >
+    <ion-text slot="start" color="darkgray">Food left</ion-text>
+    <ion-input
+      formControlName="foodLeft"
+      class="foodleft-input ion-text-center ion-padding-start ion-padding-end ion-margin-start ion-margin-end"
+      inputmode="numeric"
+      type="number"
+    ></ion-input>
+    <ion-button [disabled]="!valid" slot="end" color="gprimary" (click)="onPressOK()"
+      >OK</ion-button
+    >
+  </ion-toolbar>
+</ion-footer>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { OrderConfirmationPage } from './order-confirmation/order-confirmation.page';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { OrderService } from 'src/app/services/api-caller/order/order.service';
@@ -21,7 +21,7 @@ export class OrderPage implements OnInit {
 
   constructor(
     private router: Router,
-    private popoverController: PopoverController,
+    private modalController: ModalController,
     private storage: StorageService,
     private orderService: OrderService
   ) { }
@@ -45,7 +45,7 @@ export class OrderPage implements OnInit {
     this.hasModalOpened = true;
     const order = (isToday ? this.orderList.today[index] : this.orderList.tomorrow[index]);
     const orderDetail = await this.orderService.getOrderDetail(order.orderId);
-    const popover = await this.popoverController.create({
+    const popover = await this.modalController.create({
       component: OrderConfirmationPage,
       componentProps: { orderDetail },
       cssClass: 'update-popover'
@@ -84,6 +84,10 @@ export class OrderPage implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 
   calcNumberOfFood(items: Item[]) {

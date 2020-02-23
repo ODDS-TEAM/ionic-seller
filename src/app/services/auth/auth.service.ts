@@ -3,19 +3,44 @@ import { BehaviorSubject } from 'rxjs';
 import { MailCredential } from '../../models/mailCredentials.model';
 import { User } from 'src/app/models/user.model';
 import { StorageService } from '../storage/storage.service';
+import { HttpClient } from '@angular/common/http';
+import { WEB_SERVICE_URL } from '../webServiceVariable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private URL = 'http://103.74.254.74:3000';
+  private AUTH_URL = `${WEB_SERVICE_URL}/auth/merchant`;
+  private SIGN_UP_URL = `${this.AUTH_URL}/signup`;
+  private LOGIN_URL = `${this.AUTH_URL}/login`;
+  private UPLOAD_IMAGE_URL = `${WEB_SERVICE_URL}/upload/img/merchant/`;
 
   private authenticationState = new BehaviorSubject(false);
 
   constructor(
-    private storage: StorageService
+    private storage: StorageService,
+    private http: HttpClient
   ) { }
+
+  checkEmailExistant(email: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const http = this.http.request('GET', `${this.SIGN_UP_URL}/${email}`, {
+        observe: 'response'
+      }).subscribe(
+        res => {
+          resolve(true);
+          http.unsubscribe();
+        }, err => {
+          if (err.status === 401) {
+            resolve(false);
+          }
+          reject();
+          http.unsubscribe();
+        }
+      );
+    });
+  }
 
   isLogin() {
     return this.authenticationState.value;
@@ -31,27 +56,54 @@ export class AuthService {
     });
   }
 
-  saveProfile(user: User, mailCredential: MailCredential) {
+  saveProfile(user: User | null, mailCredential: MailCredential) {
     this.storage.setUserInfo(user);
     this.storage.setMailCredential(mailCredential);
   }
 
   login(credential: MailCredential) {
     return new Promise((resolve, reject) => {
-      /**
-       * TODO:
-       * post to merchant login
-       * res
-       * resolve res
-       * saveProfile
-       * err
-       * reject err
-       */
-      reject();
+      const http = this.http.request<User>('POST', `${this.LOGIN_URL}`, {
+        observe: 'response',
+        body: credential
+      }).subscribe(
+        res => {
+          resolve(true);
+          this.saveProfile(res.body, credential);
+          this.authenticationState.next(true);
+          http.unsubscribe();
+        }, err => {
+          reject(err);
+        }
+      );
     });
   }
 
-  signUp() {
+  signUp(user, credential: MailCredential): Promise<User> {
+    return new Promise((resolve, reject) => {
+      this.http.request<User>('POST', `${this.AUTH_URL}/signup`, {
+        observe: 'response',
+        body: {
+          email: credential.email,
+          password: credential.password,
+          restaurantName: user.restaurantName,
+          ownerName: user.ownerName,
+          phoneNumber: user.phoneNumber,
+          description: user.description,
+        }
+      }).subscribe(
+        res => {
+          resolve(res.body);
+          this.saveProfile(null, credential);
+        }, err => {
+          if (err.status === 401) {
+            reject('dup');
+          }
+          reject(err);
+          console.log(err);
+        }
+      );
+    });
     /**
      * TODO:
      * post to merchant register
@@ -67,5 +119,23 @@ export class AuthService {
     this.storage.emptyMailCredential().then(() => {
       this.authenticationState.next(false);
     }).catch(err => console.log(err));
+  }
+
+  uploadImage(uid: string, imgBlob: Blob) {
+    const formData = new FormData();
+    formData.append('imgRaw', imgBlob);
+    return new Promise((resolve, reject) => {
+      const http = this.http.request('POST', `${this.UPLOAD_IMAGE_URL}/${uid}`, {
+        observe: 'response',
+        body: formData
+      }).subscribe(
+        res => {
+          resolve(res);
+          http.unsubscribe();
+        }, err => {
+          reject();
+        }
+      );
+    });
   }
 }

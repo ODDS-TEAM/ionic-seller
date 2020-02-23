@@ -17,11 +17,9 @@ export class TabsPage implements OnInit {
   ngOnInit(): void {
     this.events.subscribe(EventBadgeService.ACTIVITY_NUMBER_TOPIC, num => {
       this.activityNumber = num;
-      console.log(this.activityNumber);
     });
     this.events.subscribe(EventBadgeService.ORDER_NUMBER_TOPIC, num => {
       this.orderNumber = num;
-      console.log(this.orderNumber);
     });
   }
 

@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(): Promise<boolean> {
-    return new Promise((resolve) => resolve(true));
+    // return new Promise((resolve) => resolve(true));
     return new Promise<boolean>((resolve, reject) => {
       if (this.auth.isLogin()) {
         resolve(true);

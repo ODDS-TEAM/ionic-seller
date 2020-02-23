@@ -1,20 +1,45 @@
 .day_row {
-    border-bottom-style: groove;
-    padding-bottom: 5px;
-    .name {
-        text-align: center;font-size: smaller;
-    }
-    .card-col {
-        padding-top: 0;
-    }
+  border-bottom-style: groove;
+  padding-bottom: 5px;
+  .name {
+    text-align: center;
+    font-size: smaller;
+  }
+  .card-col {
+    padding-top: 0;
+  }
 }
 
 .button-area {
-    text-align: right;
-    margin-left: unset;
-    margin-right: unset;
-    -webkit-margin-start: 10px;
-    margin-inline-start: 10px;
-    -webkit-margin-end: 10px;
-    margin-inline-end: 10px;
+  text-align: right;
+  margin-left: unset;
+  margin-right: unset;
+  -webkit-margin-start: 10px;
+  margin-inline-start: 10px;
+  -webkit-margin-end: 10px;
+  margin-inline-end: 10px;
+}
+
+.header-title {
+  font-family: helvetica !important;
+  font-size: 20pt;
+  font-weight: 600;
+}
+
+.header-icon {
+  font-family: helvetica !important;
+  font-size: 24pt;
+}
+
+ion-list-header {
+  background-color: transparent;
+  font-weight: bold;
+  font-size: larger;
+  letter-spacing: normal;
+  font-family: helvetica !important;
+  text-transform: none;
+}
+
+ion-item {
+  --inner-border-width: 0;
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastController } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastController: ToastController,
+    private storage: StorageService
   ) { }
 
   ngOnInit() {
@@ -25,13 +27,14 @@ export class LoginPage implements OnInit {
       email: ['', [Validators.required, Validators.minLength(1)]],
       password: ['', [Validators.required, Validators.minLength(1)]]
     });
+    this.reLogin();
   }
 
   async reLogin() {
     this.authService.relogin()
       .then((res: boolean) => {
         if (res) {
-          this.router.navigate(['/main/order']);
+          this.router.navigate(['/main/menu']);
         }
       })
       .catch(err => {
@@ -40,10 +43,6 @@ export class LoginPage implements OnInit {
   }
 
   onClickLogin() {
-    console.log('login clicked');
-    console.log(`username: ${this.credentialsForm.value.username}`);
-    console.log(`password: ${this.credentialsForm.value.password}`);
-    console.log(this.credentialsForm.value);
     this.authService.login({
       email: this.credentialsForm.value.email,
       password: this.credentialsForm.value.password
@@ -55,11 +54,11 @@ export class LoginPage implements OnInit {
   }
 
   onClickRegister() {
-    console.log('register clicked');
     this.router.navigate(['/register']);
   }
 
   goToTab() {
+    this.storage.setFakeUserInfo();
     this.router.navigate(['/main/order']);
   }
 

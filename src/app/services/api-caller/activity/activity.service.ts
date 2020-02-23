@@ -3,15 +3,15 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Order } from 'src/app/models/order.model';
 import { OrderDetail } from 'src/app/models/orderDetail.model';
 import { EventBadgeService } from '../../event/event.service';
+import { WEB_SERVICE_URL } from '../../webServiceVariable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
 
-  private WEB_SERVICE_URL = 'http://103.74.254.74:3000';
-  private ACTIVITY_URL = `${this.WEB_SERVICE_URL}/merchant/activity`;
-  private ORDER_URL = `${this.WEB_SERVICE_URL}/merchant/food/order`;
+  private ACTIVITY_URL = `${WEB_SERVICE_URL}/merchant/activity`;
+  private ORDER_URL = `${WEB_SERVICE_URL}/merchant/food/order`;
   private ACTIVITY_ALL_URL = `${this.ACTIVITY_URL}/all`;
   private ORDER_DONE_COOKING = `${this.ORDER_URL}/done`;
   private ORDER_COMPLETE = `${this.ORDER_URL}/complete`;
@@ -42,7 +42,7 @@ export class ActivityService {
               }
 
               this.eventBadge.updateActivityNumber(res.body.length);
-
+              console.log(today);
               resolve({ today, tomorrow });
             } else {
               reject(res);

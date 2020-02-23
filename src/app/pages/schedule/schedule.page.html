@@ -1,63 +1,322 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>รายการอาหารประจำสัปดาห์</ion-title>
+  <ion-toolbar style="padding-top: 14px;"> </ion-toolbar>
+  <ion-toolbar style="padding-bottom: 14px;">
+    <ion-text
+      color="darkgray"
+      class="header-title ion-margin-start ion-margin-bottom"
+      >Food schedule</ion-text
+    >
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        จันทร์
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForMon" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        อังคาร
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForTue" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create" *ngIf="listMenusForTue.length != 0"></ion-icon>
-            <ion-icon slot="icon-only" name="add"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        พฤหัสบดี
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForThu" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="day_row">
-      <ion-col class="name">
-        ศุกร์
-      </ion-col>
-      <ion-col size="10" class="card-col">
-        <food-card *ngFor="let items of listMenusForFri" imgUrl="{{items.imgUrl}}" name="{{items.name}}" limit="{{items.limit}}"></food-card>
-        <div class="button-area">
-          <ion-button style="margin: 0;">
-            <ion-icon slot="icon-only" name="create"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content color="whitegray">
+  <!-- Monday -->
+  <ion-list
+    class="ion-padding"
+    style="--inner-border-width: 0 0 1px 0; background-color: var(--ion-color-whitegray);"
+  >
+    <ion-list-header>
+      <ion-label color="darkgray">Monday</ion-label>
+    </ion-list-header>
+
+    <ion-item
+      (click)="openEditPopover(menu.day, menu.foodMenuId, menu._id, menu.foodLeft)"
+      *ngFor="let menu of listMenus.mon; let i=index"
+      style="--inner-padding-start: 0; --inner-padding-end: 0;"
+      class="ion-margin-bottom ion-no-padding"
+    >
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-img
+              style="height: 80px; object-fit: cover;"
+              [src]="menu.imageUrl"
+            ></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text
+              color="darkgray"
+              style="font-size: smaller; font-weight: bold;"
+              >{{ menu.menuName }}</ion-text
+            >
+          </ion-col>
+          <ion-col size="3">
+            <ion-text color="darkgray" style="font-size: x-small;"
+              >จำนวน</ion-text
+            >
+            <ion-text color="darkgray" style="font-weight: bold;">
+              {{ menu.foodLeft }}</ion-text
+            >
+          </ion-col>
+          <ion-col class="ion-align-self-start" size="1">
+            <ion-icon
+              name="md-trash"
+              style="font-size: larger;"
+              color="darkgray"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-toolbar
+      class="ion-text-center"
+      style="--border-width: 0 0 1px 0; --background: var(--ion-color-whitegray);"
+    >
+      <ion-icon
+        (click)="addDayMenuPopover('mon')"
+        name="add-circle"
+        style="font-size: x-large;"
+        color="gray"
+      ></ion-icon>
+    </ion-toolbar>
+  </ion-list>
+
+  <!-- Tuesday -->
+  <ion-list
+    class="ion-padding ion-margin-bottom"
+    style="--inner-border-width: 0 0 1px 0; background-color: var(--ion-color-whitegray);"
+  >
+    <ion-list-header>
+      <ion-label color="darkgray">Tuesday</ion-label>
+    </ion-list-header>
+
+    <ion-item
+      (click)="openEditPopover(menu.day, menu.foodMenuId, menu._id, menu.foodLeft)"
+      *ngFor="let menu of listMenus.tue; let i=index"
+      style="--inner-padding-start: 0; --inner-padding-end: 0;"
+      class="ion-margin-bottom ion-no-padding"
+    >
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-img
+              style="height: 80px; object-fit: cover;"
+              [src]="menu.imageUrl"
+            ></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text
+              color="darkgray"
+              style="font-size: smaller; font-weight: bold;"
+              >{{ menu.menuName }}</ion-text
+            >
+          </ion-col>
+          <ion-col size="3">
+            <ion-text color="darkgray" style="font-size: x-small;"
+              >จำนวน</ion-text
+            >
+            <ion-text color="darkgray" style="font-weight: bold;">
+              {{ menu.foodLeft }}</ion-text
+            >
+          </ion-col>
+          <ion-col class="ion-align-self-start" size="1">
+            <ion-icon
+              name="md-trash"
+              style="font-size: larger;"
+              color="darkgray"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-toolbar
+      class="ion-text-center"
+      style="--border-width: 0 0 1px 0; --background: var(--ion-color-whitegray);"
+    >
+      <ion-icon
+        (click)="addDayMenuPopover('tue')"
+        name="add-circle"
+        style="font-size: x-large;"
+        color="gray"
+      ></ion-icon>
+    </ion-toolbar>
+  </ion-list>
+
+  <!-- Wednesday -->
+  <ion-list
+    class="ion-padding ion-margin-bottom"
+    style="--inner-border-width: 0 0 1px 0; background-color: var(--ion-color-whitegray);"
+  >
+    <ion-list-header>
+      <ion-label color="darkgray">Wednesday</ion-label>
+    </ion-list-header>
+
+    <ion-item
+      (click)="openEditPopover(menu.day, menu.foodMenuId, menu._id, menu.foodLeft)"
+      *ngFor="let menu of listMenus.wed; let i=index"
+      style="--inner-padding-start: 0; --inner-padding-end: 0;"
+      class="ion-margin-bottom ion-no-padding"
+    >
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-img
+              style="height: 80px; object-fit: cover;"
+              [src]="menu.imageUrl"
+            ></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text
+              color="darkgray"
+              style="font-size: smaller; font-weight: bold;"
+              >{{ menu.menuName }}</ion-text
+            >
+          </ion-col>
+          <ion-col size="3">
+            <ion-text color="darkgray" style="font-size: x-small;"
+              >จำนวน</ion-text
+            >
+            <ion-text color="darkgray" style="font-weight: bold;">
+              {{ menu.foodLeft }}</ion-text
+            >
+          </ion-col>
+          <ion-col class="ion-align-self-start" size="1">
+            <ion-icon
+              name="md-trash"
+              style="font-size: larger;"
+              color="darkgray"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-toolbar
+      class="ion-text-center"
+      style="--border-width: 0 0 1px 0; --background: var(--ion-color-whitegray);"
+    >
+      <ion-icon
+        (click)="addDayMenuPopover('wed')"
+        name="add-circle"
+        style="font-size: x-large;"
+        color="gray"
+      ></ion-icon>
+    </ion-toolbar>
+  </ion-list>
+
+  <!-- Thursday -->
+  <ion-list
+    class="ion-padding ion-margin-bottom"
+    style="--inner-border-width: 0 0 1px 0; background-color: var(--ion-color-whitegray);"
+  >
+    <ion-list-header>
+      <ion-label color="darkgray">Thursday</ion-label>
+    </ion-list-header>
+
+    <ion-item
+      (click)="openEditPopover(menu.day, menu.foodMenuId, menu._id, menu.foodLeft)"
+      *ngFor="let menu of listMenus.thu; let i=index"
+      style="--inner-padding-start: 0; --inner-padding-end: 0;"
+      class="ion-margin-bottom ion-no-padding"
+    >
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-img
+              style="height: 80px; object-fit: cover;"
+              [src]="menu.imageUrl"
+            ></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text
+              color="darkgray"
+              style="font-size: smaller; font-weight: bold;"
+              >{{ menu.menuName }}</ion-text
+            >
+          </ion-col>
+          <ion-col size="3">
+            <ion-text color="darkgray" style="font-size: x-small;"
+              >จำนวน</ion-text
+            >
+            <ion-text color="darkgray" style="font-weight: bold;">
+              {{ menu.foodLeft }}</ion-text
+            >
+          </ion-col>
+          <ion-col class="ion-align-self-start" size="1">
+            <ion-icon
+              name="md-trash"
+              style="font-size: larger;"
+              color="darkgray"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-toolbar
+      class="ion-text-center"
+      style="--border-width: 0 0 1px 0; --background: var(--ion-color-whitegray);"
+    >
+      <ion-icon
+        (click)="addDayMenuPopover('thu')"
+        name="add-circle"
+        style="font-size: x-large;"
+        color="gray"
+      ></ion-icon>
+    </ion-toolbar>
+  </ion-list>
+
+  <!-- Friday -->
+  <ion-list
+    class="ion-padding"
+    style="--inner-border-width: 0 0 1px 0; background-color: var(--ion-color-whitegray);"
+  >
+    <ion-list-header>
+      <ion-label color="darkgray">Friday</ion-label>
+    </ion-list-header>
+
+    <ion-item
+      (click)="openEditPopover(menu.day, menu.foodMenuId, menu._id, menu.foodLeft)"
+      *ngFor="let menu of listMenus.fri; let i=index"
+      style="--inner-padding-start: 0; --inner-padding-end: 0;"
+      class="ion-margin-bottom ion-no-padding"
+    >
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="4">
+            <ion-img
+              style="height: 80px; object-fit: cover;"
+              [src]="menu.imageUrl"
+            ></ion-img>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text
+              color="darkgray"
+              style="font-size: smaller; font-weight: bold;"
+              >{{ menu.menuName }}</ion-text
+            >
+          </ion-col>
+          <ion-col size="3">
+            <ion-text color="darkgray" style="font-size: x-small;"
+              >จำนวน</ion-text
+            >
+            <ion-text color="darkgray" style="font-weight: bold;">
+              {{ menu.foodLeft }}</ion-text
+            >
+          </ion-col>
+          <ion-col class="ion-align-self-start" size="1">
+            <ion-icon
+              name="md-trash"
+              style="font-size: larger;"
+              color="darkgray"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-toolbar
+      class="ion-text-center"
+      style="--border-width: 0 0 1px 0; --background: var(--ion-color-whitegray);"
+    >
+      <ion-icon
+        (click)="addDayMenuPopover('fri')"
+        name="add-circle"
+        style="font-size: x-large;"
+        color="gray"
+      ></ion-icon>
+    </ion-toolbar>
+  </ion-list>
 </ion-content>

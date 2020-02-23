@@ -18,7 +18,6 @@ export class ActivityUpdationPage implements OnInit {
 
   ngOnInit() {
     // setTimeout(() => this.modalController.dismiss(), 20000);
-    console.log(this.activityDetail);
     for (const item of this.activityDetail.items) {
       this.totalPrice += item.price * item.numberOfItem;
     }

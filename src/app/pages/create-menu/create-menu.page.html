@@ -20,13 +20,14 @@
   style="--padding-top: 10vh; --padding-start: 15vw; --padding-end: 15vw;"
 >
   <div
-    style="background-color: var(--ion-color-whitegray-shade); width: 50vw; height: 40vw; margin-left: auto; margin-right: auto;"
+    (click)="selectImage()"
+    style="overflow: hidden; background-color: var(--ion-color-whitegray-shade); width: 50vw; height: 40vw; margin-left: auto; margin-right: auto;"
     class="ion-no-padding"
   >
-    <ion-img style="object-fit: cover;"> </ion-img>
+    <ion-img [src]="currentImageUrl" style="object-fit: cover;"> </ion-img>
     <ion-icon
       color="darkgray"
-      style="font-size: 24pt; margin: auto 0 auto 0; float: right;"
+      style="z-index: 20; font-size: 24pt; margin: auto 0 auto 0; float: right;"
       name="ios-camera"
     ></ion-icon>
   </div>
@@ -71,19 +72,27 @@
         class="row option-container"
       >
         <ion-input
-          formControlName="optionTitle"
+          formControlName="titleOption"
           color="darkgray"
           type="text"
           inputmode="text"
           placeholder="Option title"
         ></ion-input>
-        <ion-input
-          formControlName="optionType"
-          color="darkgray"
-          type="text"
-          inputmode="text"
-          placeholder="Option type"
-        ></ion-input>
+        <ion-toolbar class="ion-no-padding">
+          <ion-select
+            style="--min-width: 100%;"
+            formControlName="singleChoice"
+            multiple="false"
+            placeholder="Can select multiple choice ?"
+          >
+            <ion-select-option value="{{true}}"
+              >เลือกได้อย่างเดียว</ion-select-option
+            >
+            <ion-select-option value="{{false}}"
+              >เลือกได้หลายอย่าง</ion-select-option
+            >
+          </ion-select>
+        </ion-toolbar>
 
         <!-- Iterate choices -->
         <ion-toolbar
@@ -92,23 +101,23 @@
           class="ion-no-padding"
         >
           <ion-input
-            formControlName="choiceTitle"
+            formControlName="titleChoice"
             color="darkgray"
             slot="start"
             type="text"
             inputmode="text"
             placeholder="Choice title"
-            style="flex: 4 !important; margin-right: 4px;"
+            style="flex: 3 !important; margin-right: 4px;"
             class="ion-no-margin"
           ></ion-input>
           <ion-input
-            formControlName="choicePrice"
+            formControlName="priceChoice"
             style="--padding-start: 0;"
             color="darkgray"
             type="number"
             inputmode="numeric"
-            class="ion-no-margin"
-            >&nbsp;+</ion-input
+            class="ion-no-margin ion-text-right"
+            >&nbsp;&nbsp;+&nbsp;</ion-input
           >
           <ion-text slot="end" color="darkgray">&nbsp;฿</ion-text>
         </ion-toolbar>
@@ -125,6 +134,23 @@
       </div>
     </ion-item>
   </form>
-  <ion-button (click)="addOption()">Add option</ion-button>
-  <ion-button (click)="logForm()">Log</ion-button>
+  <ion-toolbar>
+    <ion-button fill="clear" color="gprimary" (click)="addOption()"
+      ><ion-icon name="add-circle"></ion-icon>&nbsp; Add option</ion-button
+    >
+  </ion-toolbar>
+  <ion-toolbar class="ion-margin-top ion-margin-bottom ion-text-center">
+    <ion-button
+      (click)="createMenu()"
+      type="submit"
+      class="ion-margin-top submit-button"
+      shape="round"
+    >
+      <span style="display: inline-block; vertical-align: middle;">
+        <ion-text style="vertical-align: middle; font-weight: bold;">
+          Create menu
+        </ion-text>
+      </span>
+    </ion-button>
+  </ion-toolbar>
 </ion-content>
