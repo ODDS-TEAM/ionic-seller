@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Plugins, CameraResultType } from '@capacitor/core';
 import { HttpClient } from '@angular/common/http';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController, ModalController } from '@ionic/angular';
 
 import { FoodMenuDetail } from '../../models/menuDetail.model';
 import { MenuService } from 'src/app/services/api-caller/menu/menu.service';
@@ -22,9 +22,9 @@ export class CreateMenuPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private navControl: NavController,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private loadingController: LoadingController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -101,8 +101,10 @@ export class CreateMenuPage implements OnInit {
       option.singleChoice = option.singleChoice === 'true';
     }
 
+    const loading = await this.presentLoading();
     try {
       const food = await this.menuService.createMenu(value);
+      console.log(food);
       const mimeType = this.currentImageUrl.split(',')[0].split(';')[0].split(':')[1];
       const data = this.currentImageUrl.split(',')[1];
 
@@ -117,12 +119,23 @@ export class CreateMenuPage implements OnInit {
       const imgBlob = new Blob([ab], { type: mimeType });
 
       await this.menuService.uploadMenuImage(food._id, imgBlob);
+      this.modalController.dismiss();
     } catch (err) {
       console.log(err);
+    } finally {
+      loading.dismiss();
     }
   }
 
   logForm() {
     console.log(this.formGroup.value);
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      spinner: 'bubbles'
+    });
+    await loading.present();
+    return loading;
   }
 }

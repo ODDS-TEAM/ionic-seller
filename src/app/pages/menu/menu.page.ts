@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { MenuService } from 'src/app/services/api-caller/menu/menu.service';
 import { FoodMenu } from 'src/app/models/menu.model';
 
@@ -18,6 +18,13 @@ export class MenuPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.router.events.subscribe((value: NavigationEnd) => {
+      if (value.urlAfterRedirects && value instanceof NavigationEnd) {
+        if (value.urlAfterRedirects === '/main/activity') {
+          this.getMenuList();
+        }
+      }
+    });
     this.menuList = [];
     this.getMenuList();
   }

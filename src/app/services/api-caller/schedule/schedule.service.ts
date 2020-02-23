@@ -43,10 +43,11 @@ export class ScheduleService {
                 menus.fri.push(menu);
               }
             }
+            console.log(menus);
             resolve(menus);
             http.unsubscribe();
           }, err => {
-            if (err === 401) {
+            if (err.status === 401) {
               resolve(menus);
               return;
             }
@@ -121,6 +122,24 @@ export class ScheduleService {
           }
         );
       }).catch(err => resolve(err));
+    });
+  }
+
+  deleteSchedule(dayMenuId: string) {
+    return new Promise((resolve, reject) => {
+      this.storage.getUserInfo().then(user => {
+        const http = this.http.request('DELETE', `${this.SCHEDULE_URL}/${dayMenuId}`, {
+          observe: 'response'
+        }).subscribe(
+          res => {
+            resolve(true);
+            http.unsubscribe();
+          }, err => {
+            resolve(false);
+            http.unsubscribe();
+          }
+        );
+      });
     });
   }
 

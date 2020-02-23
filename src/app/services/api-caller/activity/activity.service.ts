@@ -41,7 +41,7 @@ export class ActivityService {
                 today.push(order);
               }
 
-              this.eventBadge.updateActivityNumber(res.body.length);
+              this.eventBadge.updateActivityNumber(today.length + tomorrow.length);
               console.log(today);
               resolve({ today, tomorrow });
             } else {

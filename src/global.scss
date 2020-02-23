@@ -43,3 +43,15 @@
     --min-height: 75vh !important;
     --max-height: 75vh !important;
 }
+
+.delete-schedule-popover .popover-content {
+    left: 5vw !important;
+    --min-width: 90vw !important;
+    --max-width: 90vw !important;
+    --min-height: 30vh !important;
+    --max-height: 30vh !important;
+
+    > .popover-viewport {
+        --height: 100% !important;
+    }
+}

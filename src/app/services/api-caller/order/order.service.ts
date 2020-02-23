@@ -84,7 +84,7 @@ export class OrderService {
               }
             }
 
-            this.eventBadge.updateOrderNumber(res.body.length);
+            this.eventBadge.updateOrderNumber(today.length + tomorrow.length);
 
             resolve({ today, tomorrow });
           }, err => {

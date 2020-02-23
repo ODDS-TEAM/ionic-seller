@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ScheduleService } from 'src/app/services/api-caller/schedule/schedule.service';
 import { Menu } from 'src/app/models/schedule.model';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 import { AddFoodPage } from './add-food/add-food.page';
 import { OverlayEventDetail } from '@ionic/core';
+import { DeleteConfirmPage } from './delete-confirm/delete-confirm.page';
 
 @Component({
   selector: 'app-table',
@@ -16,7 +17,8 @@ export class SchedulePage implements OnInit {
 
   constructor(
     private popoverController: PopoverController,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -68,6 +70,32 @@ export class SchedulePage implements OnInit {
     console.log(day);
   }
 
+  async onTrashClick(dayMenuIndex: number, day: string) {
+    const popover = await this.popoverController.create({
+      component: DeleteConfirmPage,
+      cssClass: 'delete-schedule-popover'
+    });
+
+    popover.onDidDismiss().then((value: OverlayEventDetail) => {
+      if (value.role === 'delete') {
+        this.deleteDaymenu(dayMenuIndex, day);
+      }
+    });
+
+    await popover.present();
+  }
+
+  deleteDaymenu(dayMenuIndex: number, day: string) {
+    this.scheduleService.deleteSchedule(this.listMenus[day][dayMenuIndex]._id)
+      .then(success => {
+        if (success) {
+          this.getScheduleList();
+        } else {
+          this.presentToast('Error while delete scheduled menu.');
+        }
+      });
+  }
+
   async openEditPopover(day: string, foodId: string, dayMenuId: string, foodLeft: number) {
     console.log(day, foodId, dayMenuId, foodLeft);
     const popover = await this.popoverController.create({
@@ -92,5 +120,13 @@ export class SchedulePage implements OnInit {
     });
 
     await popover.present();
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000
+    });
+    toast.present();
   }
 }
