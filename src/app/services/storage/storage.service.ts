@@ -61,7 +61,7 @@ export class StorageService {
 
   emptyMailCredential() {
     return new Promise((resolve, reject) => {
-      this.storage.remove(this.CREDENTIAL_KEY)
+     this.storage.remove(this.CREDENTIAL_KEY)
         .then(res => {
           resolve(res);
         }).catch(err => {
@@ -71,20 +71,18 @@ export class StorageService {
   }
 
   getMailCredential() {
-    return new Promise<MailCredential>((resolve) => {
-      resolve({ email: 'a@gmail.com', password: '5555' });
-    });
+    // return new Promise<MailCredential>((resolve) => {
+    //   resolve({ email: 'a@gmail.com', password: '5555' });
+    // });
     return new Promise<MailCredential>((resolve, reject) => {
-      this.storage.ready().then(() => {
-        this.storage.get(this.CREDENTIAL_KEY)
-          .then(res => {
-            const cred: MailCredential = JSON.parse(res);
-            console.log(cred);
-            resolve(cred);
-          }).catch(err => {
-            reject(err);
-          });
-      });
+      this.storage.get(this.CREDENTIAL_KEY)
+        .then(res => {
+          const cred: MailCredential = JSON.parse(res);
+          console.log(cred);
+          resolve(cred);
+        }).catch(err => {
+          reject(err);
+        });
     });
   }
 }

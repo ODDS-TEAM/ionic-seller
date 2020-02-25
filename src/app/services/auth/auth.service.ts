@@ -116,9 +116,12 @@ export class AuthService {
   }
 
   signOut() {
-    this.storage.emptyMailCredential().then(() => {
-      this.authenticationState.next(false);
-    }).catch(err => console.log(err));
+    return new Promise((resolve, reject) => {
+      this.storage.emptyMailCredential().then(() => {
+        this.authenticationState.next(false);
+        resolve();
+      }).catch(err => reject(err));
+    });
   }
 
   uploadImage(uid: string, imgBlob: Blob) {

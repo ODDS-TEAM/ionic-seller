@@ -18,8 +18,9 @@ export class ProfilePage implements OnInit {
   }
 
   signOut() {
-    this.auth.signOut();
-    this.router.navigate(['/login']);
+    this.auth.signOut().then(() => {
+      this.router.navigate(['/login']);
+    }).catch(err => console.error(err));
   }
 
 }
