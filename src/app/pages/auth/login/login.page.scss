@@ -12,7 +12,7 @@ ion-input {
   background-color: white;
   border-radius: 128px;
   text-align: left !important;
-  padding-left: 16px !important;
+  --padding-start: 16px !important;
   color: gray;
   height: 36px;
   font-size: 10pt;
