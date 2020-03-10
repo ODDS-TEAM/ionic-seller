@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">KinKaoMerchant</string>
-    <string name="title_activity_main">KinKaoMerchant</string>
-    <string name="package_name">com.odds.sec.intern.kinkaoseller</string>
-    <string name="custom_url_scheme">com.odds.sec.intern.kinkaoseller</string>
-</resources>

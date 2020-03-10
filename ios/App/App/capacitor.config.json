@@ -1,13 +1,8 @@
 {
-  "appId": "com.odds.sec.intern.kinkaoseller",
-  "appName": "KinKaoMerchant",
+  "appId": "io.ionic.kin.kao.merchant",
+  "appName": "Kin Kao Merchant",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
-  "cordova": {},
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 5000
-    }
-  }
+  "cordova": {}
 }
