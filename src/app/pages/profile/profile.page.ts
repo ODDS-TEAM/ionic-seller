@@ -6,6 +6,10 @@ import { ProfileService } from 'src/app/services/api-caller/profile/profile.serv
 import { User } from 'src/app/models/user.model';
 import { LoadingController, ToastController } from '@ionic/angular';
 
+import { Plugins, CameraResultType, FilesystemDirectory } from '@capacitor/core';
+
+const { CapCamera, Filesystem, Camera } = Plugins;
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -56,10 +60,14 @@ export class ProfilePage implements OnInit {
       email: userInfo.email,
       description: userInfo.description
     });
+    this.changeImage = false;
   }
 
   async onPressProfilePicture() {
-    this.changeImage = true;
+    const complete = await this.selectImage();
+    if (complete) {
+      this.changeImage = true;
+    }
   }
 
   async onPressEditProfile() {
@@ -67,13 +75,6 @@ export class ProfilePage implements OnInit {
   }
 
   async onPressUpdateProfile() {
-    console.log(this.profileFormGroup.value);
-    /**
-     * TODO:
-     * update profile with form control value
-     * if got OK status and change profile picture
-     * upload imgBlob to api
-     */
     const loading = await this.presentLoading();
     try {
       await this.profile.updateProfile(this.profileFormGroup.value);
@@ -101,7 +102,19 @@ export class ProfilePage implements OnInit {
   }
 
   async onPressSignOut() {
+    await this.signOut();
+  }
 
+  async selectImage() {
+    try {
+      const image = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+      });
+      this.selectImageUrl = image.dataUrl;
+      return true;
+    } catch (err) {
+      console.log('catch on selectImage()');
+    }
   }
 
   toggleEditMode() {
