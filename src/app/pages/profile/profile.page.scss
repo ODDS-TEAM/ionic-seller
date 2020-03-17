@@ -1,0 +1,26 @@
+.profile-avatar {
+  transform: translateY(-50%);
+}
+
+.half-bg {
+  background-color: var(--ion-color-gprimary-background);
+  height: 216px;
+}
+
+ion-item {
+  --inner-border-width: 0 !important;
+  ion-label {
+    font-weight: bolder;
+  }
+}
+
+ion-input.edit-mode {
+  border-style: solid;
+  border-color: var(--ion-color-gprimary);
+  border-width: 0 0 0.35px 0;
+}
+
+.gradient-button {
+  max-height: 36px;
+  --background: linear-gradient(to left, #4bdb9d, #40b8ad);
+}

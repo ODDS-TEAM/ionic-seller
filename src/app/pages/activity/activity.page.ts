@@ -39,6 +39,10 @@ export class ActivityPage implements OnInit {
     this.activityList = { today: [], tomorrow: [] };
   }
 
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
   async openUpdateModal(index: number, isToday: boolean) {
     if (this.hasModalOpened) {
       return;

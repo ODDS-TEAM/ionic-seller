@@ -3,15 +3,15 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Order } from 'src/app/models/order.model';
 import { OrderDetail } from 'src/app/models/orderDetail.model';
 import { EventBadgeService } from '../../event/event.service';
-import { WEB_SERVICE_URL } from '../../webServiceVariable';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
 
-  private ACTIVITY_URL = `${WEB_SERVICE_URL}/merchant/activity`;
-  private ORDER_URL = `${WEB_SERVICE_URL}/merchant/food/order`;
+  private ACTIVITY_URL = `${environment.apiUrl}/merchant/activity`;
+  private ORDER_URL = `${environment.apiUrl}/merchant/food/order`;
   private ACTIVITY_ALL_URL = `${this.ACTIVITY_URL}/all`;
   private ORDER_DONE_COOKING = `${this.ORDER_URL}/done`;
   private ORDER_COMPLETE = `${this.ORDER_URL}/complete`;

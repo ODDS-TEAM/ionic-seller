@@ -4,17 +4,17 @@ import { MailCredential } from '../../models/mailCredentials.model';
 import { User } from 'src/app/models/user.model';
 import { StorageService } from '../storage/storage.service';
 import { HttpClient } from '@angular/common/http';
-import { WEB_SERVICE_URL } from '../webServiceVariable';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private AUTH_URL = `${WEB_SERVICE_URL}/auth/merchant`;
+  private AUTH_URL = `${environment.apiUrl}/auth/merchant`;
   private SIGN_UP_URL = `${this.AUTH_URL}/signup`;
   private LOGIN_URL = `${this.AUTH_URL}/login`;
-  private UPLOAD_IMAGE_URL = `${WEB_SERVICE_URL}/upload/img/merchant/`;
+  private UPLOAD_IMAGE_URL = `${environment.apiUrl}/upload/img/merchant/`;
 
   private authenticationState = new BehaviorSubject(false);
 

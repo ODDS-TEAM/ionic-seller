@@ -3,14 +3,14 @@ import { Order, Item } from '../../../models/order.model';
 import { OrderDetail } from '../../../models/orderDetail.model';
 import { HttpClient } from '@angular/common/http';
 import { EventBadgeService } from '../../event/event.service';
-import { WEB_SERVICE_URL } from '../../webServiceVariable';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  private ORDER_MAIN_URL = `${WEB_SERVICE_URL}/merchant/food/order`;
+  private ORDER_MAIN_URL = `${environment.apiUrl}/merchant/food/order`;
   private ORDER_DETAIL_URL = this.ORDER_MAIN_URL + '/detail';
   private ORDER_REJECT_URL = this.ORDER_MAIN_URL + '/cancel';
   private ORDER_ACCEPT_URL = this.ORDER_MAIN_URL + '/confirm';

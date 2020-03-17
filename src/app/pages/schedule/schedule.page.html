@@ -1,5 +1,13 @@
 <ion-header>
-  <ion-toolbar style="padding-top: 14px;"> </ion-toolbar>
+  <ion-toolbar class="safe-top-padding">
+    <ion-icon
+      color="lightgray"
+      class="header-icon ion-margin-end"
+      slot="end"
+      name="md-contact"
+      (click)="goToProfile()"
+    ></ion-icon>
+  </ion-toolbar>
   <ion-toolbar style="padding-bottom: 14px;">
     <ion-text color="darkgray" class="header-title ion-margin-start ion-margin-bottom">Food schedule</ion-text>
   </ion-toolbar>

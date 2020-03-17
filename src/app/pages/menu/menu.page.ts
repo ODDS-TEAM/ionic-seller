@@ -29,6 +29,10 @@ export class MenuPage implements OnInit {
     this.getMenuList();
   }
 
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
   async getMenuList() {
     this.menuList = await this.menuService.getMenuList();
   }

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../../storage/storage.service';
 import { HttpClient } from '@angular/common/http';
-import { WEB_SERVICE_URL } from '../../webServiceVariable';
 import { Menu } from 'src/app/models/schedule.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScheduleService {
 
-  private SCHEDULE_URL = `${WEB_SERVICE_URL}/merchant/schedule`;
+  private SCHEDULE_URL = `${environment.apiUrl}/merchant/schedule`;
 
   constructor(
     private storage: StorageService,

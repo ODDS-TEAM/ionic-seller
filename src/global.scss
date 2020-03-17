@@ -55,3 +55,8 @@
         --height: 100% !important;
     }
 }
+
+.safe-top-padding {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}

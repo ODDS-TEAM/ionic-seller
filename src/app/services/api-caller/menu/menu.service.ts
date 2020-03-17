@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../../storage/storage.service';
-import { WEB_SERVICE_URL } from '../../webServiceVariable';
 import { FoodMenu } from 'src/app/models/menu.model';
 import { FoodMenuDetail } from 'src/app/models/menuDetail.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
 
-  private MENU_URL = `${WEB_SERVICE_URL}/merchant/menu`;
+  private MENU_URL = `${environment.apiUrl}/merchant/menu`;
 
   constructor(
     private http: HttpClient,
@@ -63,7 +63,7 @@ export class MenuService {
     const formData = new FormData();
     formData.append('imgRaw', imgBlob, 'a.png');
     return new Promise((resolve, reject) => {
-      const http = this.http.request('POST', `${WEB_SERVICE_URL}/upload/img/food/${foodId}`, {
+      const http = this.http.request('POST', `${environment.apiUrl}/upload/img/food/${foodId}`, {
         observe: 'response',
         body: formData
       }).subscribe(

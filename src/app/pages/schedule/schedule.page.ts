@@ -5,6 +5,7 @@ import { PopoverController, ToastController } from '@ionic/angular';
 import { AddFoodPage } from './add-food/add-food.page';
 import { OverlayEventDetail } from '@ionic/core';
 import { DeleteConfirmPage } from './delete-confirm/delete-confirm.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -18,12 +19,17 @@ export class SchedulePage implements OnInit {
   constructor(
     private popoverController: PopoverController,
     private scheduleService: ScheduleService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.listMenus = { mon: [], tue: [], wed: [], thu: [], fri: [] };
     this.getScheduleList();
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 
   async getScheduleList() {
