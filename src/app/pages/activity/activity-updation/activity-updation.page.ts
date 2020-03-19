@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { OrderDetail } from 'src/app/models/orderDetail.model';
 
 @Component({
@@ -13,7 +13,7 @@ export class ActivityUpdationPage implements OnInit {
   totalPrice = 0;
 
   constructor(
-    private popoverController: PopoverController
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -26,13 +26,13 @@ export class ActivityUpdationPage implements OnInit {
   updateOrder() {
     switch (this.activityDetail.state) {
       case 'cf':
-        this.popoverController.dismiss({
+        this.modalController.dismiss({
           command: 'done',
           activityDetail: this.activityDetail
         });
         break;
       case 'cd':
-        this.popoverController.dismiss({
+        this.modalController.dismiss({
           command: 'complete',
           activityDetail: this.activityDetail
         });
@@ -41,7 +41,7 @@ export class ActivityUpdationPage implements OnInit {
   }
 
   closeModal() {
-    this.popoverController.dismiss();
+    this.modalController.dismiss();
   }
 
   transformDateTime(dateTime) {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ModalController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Order, Item } from 'src/app/models/order.model';
 import { ActivityService } from 'src/app/services/api-caller/activity/activity.service';
@@ -23,7 +23,7 @@ export class ActivityPage implements OnInit {
     private router: Router,
     private storage: StorageService,
     private activityService: ActivityService,
-    private popoverController: PopoverController,
+    private modalController: ModalController,
   ) { }
 
   ngOnInit() {
@@ -50,10 +50,9 @@ export class ActivityPage implements OnInit {
     this.hasModalOpened = true;
     const order = (isToday ? this.activityList.today[index] : this.activityList.tomorrow[index]);
     const activityDetail = await this.activityService.getActivityDetail(order.orderId);
-    const popover = await this.popoverController.create({
+    const popover = await this.modalController.create({
       component: ActivityUpdationPage,
       componentProps: { activityDetail: activityDetail[0] },
-      cssClass: 'update-popover'
     });
 
     popover.style.backgroundColor = 'rgba(0, 0, 0, 0.29)';
