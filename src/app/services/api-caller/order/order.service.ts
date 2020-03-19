@@ -86,7 +86,7 @@ export class OrderService {
 
             this.eventBadge.updateOrderNumber(today.length + tomorrow.length);
 
-            resolve({ today, tomorrow });
+            resolve({ today: today.reverse(), tomorrow: tomorrow.reverse() });
           }, err => {
             if (err.status === 401) {
               this.eventBadge.updateOrderNumber(0);
