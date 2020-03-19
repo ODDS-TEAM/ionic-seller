@@ -42,6 +42,11 @@
               type="email"></ion-input>
           </ion-item>
           <ion-item>
+            <ion-label position="stacked" color="gprimary">Phone number</ion-label>
+            <ion-input formControlName="phoneNumber" [readonly]="!editMode" [class.edit-mode]="editMode" inputmode="text"
+              type="text"></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label position="stacked" color="gprimary">Description</ion-label>
             <ion-input formControlName="description" [readonly]="!editMode" [class.edit-mode]="editMode"
               inputmode="text" type="text"></ion-input>

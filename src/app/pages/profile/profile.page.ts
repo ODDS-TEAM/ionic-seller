@@ -47,7 +47,8 @@ export class ProfilePage implements OnInit {
       restaurantName: new FormControl('', [Validators.required]),
       ownerName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      description: new FormControl('', [Validators.required])
+      description: new FormControl('', [Validators.required]),
+      phoneNumber: new FormControl('', [Validators.required])
     });
   }
 
@@ -58,7 +59,8 @@ export class ProfilePage implements OnInit {
       restaurantName: userInfo.restaurantName,
       ownerName: userInfo.ownerName,
       email: userInfo.email,
-      description: userInfo.description
+      description: userInfo.description,
+      phoneNumber: userInfo.phoneNumber
     });
     this.changeImage = false;
   }
@@ -97,7 +99,8 @@ export class ProfilePage implements OnInit {
       restaurantName: this.currentUserInfo.restaurantName,
       ownerName: this.currentUserInfo.ownerName,
       email: this.currentUserInfo.email,
-      description: this.currentUserInfo.description
+      description: this.currentUserInfo.description,
+      phoneNumber: this.currentUserInfo.phoneNumber
     });
   }
 
