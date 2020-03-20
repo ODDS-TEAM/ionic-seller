@@ -30,7 +30,7 @@ export class ProfileService {
   updateProfile(body: { restaurantName: string, ownerName: string, email: string, description: string }) {
     return new Promise((resolve, reject) => {
       this.storage.getUserInfo().then(storageUser => {
-        this.http.post(`${environment.apiUrl}/merchant/profile/edit/${storageUser.uid}`, { observe: 'response', body })
+        this.http.post(`${environment.apiUrl}/merchant/profile/edit/${storageUser.uid}`, body, { observe: 'response' })
           .subscribe( response => {
             resolve(response);
           }, err => {
