@@ -14,6 +14,24 @@ import { Router } from '@angular/router';
 })
 export class SchedulePage implements OnInit {
 
+  days = [
+    {
+      name: 'Monday',
+      code: 'mon'
+    }, {
+      name: 'Tuesday',
+      code: 'tue'
+    }, {
+      name: 'Wednesday',
+      code: 'wed'
+    }, {
+      name: 'Thursday',
+      code: 'thu'
+    }, {
+      name: 'Friday',
+      code: 'fri'
+    }
+  ];
   listMenus: { mon: Menu[], tue: Menu[], wed: Menu[], thu: Menu[], fri: Menu[] };
 
   constructor(
