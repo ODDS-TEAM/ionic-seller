@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, ModalController } from '@ionic/angular';
+import { PopoverController, ModalController, LoadingController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { Order, Item } from 'src/app/models/order.model';
 import { ActivityService } from 'src/app/services/api-caller/activity/activity.service';
@@ -24,6 +24,7 @@ export class ActivityPage implements OnInit {
     private storage: StorageService,
     private activityService: ActivityService,
     private modalController: ModalController,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -120,6 +121,14 @@ export class ActivityPage implements OnInit {
       arr.push(item.foodName + ' ' + item.numberOfItem);
     }
     return arr.join(', ');
+  }
+
+  routeToHistoryPage() {
+    this.router.navigate(['/history']);
+  }
+
+  onPressHistoryButton() {
+    this.routeToHistoryPage();
   }
 
 }

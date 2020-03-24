@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark" defaultHref="/main/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="whitegray ion-padding-top">
+  <ion-list>
+    <!-- Iteration item -->
+    <ion-item button *ngFor="let history of historyList; let i=index;" (click)="onPressHistoryItem(i)">
+      <ion-grid class="ion-padding-horizontal">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="7" class="ion-padding-start ion-padding-end"
+            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <ion-text class="font-smaller font-weight-bold" color="darkgray">
+              {{ history.customerName }}
+            </ion-text>
+            <br>
+            <ion-text color="lightgray" style="font-size: small;">
+              {{ joinFoodName(history.items) }}
+            </ion-text>
+            <br />
+            <ion-text *ngIf="history.state === 'cc'" class="font-smaller" color="danger">Canceled</ion-text>
+          </ion-col>
+          <ion-col size="5" class="ion-text-right" style="font-size: smaller;">
+            <ion-text color="lightgray">
+              {{ dateToString(history.dateTime) }}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

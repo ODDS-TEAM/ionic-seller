@@ -1,0 +1,50 @@
+.menu-text {
+  color: var(--ion-color-darkgray);
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.option-text {
+  font-size: 10pt;
+}
+
+.stretch {
+  display: inline-block;
+  -webkit-transform: scale(0.95, 1); /* Safari and Chrome */
+  -moz-transform: scale(0.95, 1); /* Firefox */
+  -ms-transform: scale(0.95, 1); /* IE 9 */
+  -o-transform: scale(0.95, 1); /* Opera */
+  transform: scale(0.95, 1); /* W3C */
+}
+
+.queue-number {
+  font-size: 52pt;
+}
+
+ion-text h3 {
+  font-weight: 600;
+}
+
+ion-item {
+  --inner-border-width: 0;
+}
+
+ion-list-header ion-label,
+ion-toolbar ion-label {
+  font-size: 12pt;
+  letter-spacing: normal;
+  text-transform: none;
+  font-weight: 700;
+}
+
+ion-list {
+  margin-bottom: 16px;
+}
+
+.status-text {
+  font-size: 8pt;
+}
+
+// ion-col {
+//   border: 1px solid black;
+// }

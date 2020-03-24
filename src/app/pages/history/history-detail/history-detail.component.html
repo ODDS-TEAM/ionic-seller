@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="onPressCloseIcon()">
+        <ion-icon color="darkgray" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ headerTitle[0] }}&emsp;{{headerTitle[1]}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="whitegray" class="ion-padding-top">
+  <ion-toolbar class="bg-transparent" style="padding-left: 26px; padding-right: 26px; --min-height: 20px;">
+    <ion-text slot="start" class="font-x-small" color="darkgray">Order Id: {{ historyDetail._id }}</ion-text>
+    <ion-text slot="end" class="font-x-small" color="darkgray">Your queue: {{ historyDetail.queue }}</ion-text>
+  </ion-toolbar>
+  <ion-list>
+    <ion-list-header style="padding-left: 26px !important; padding-right: 26px;">
+      <ion-label color="darkgray">Restaurant</ion-label>
+    </ion-list-header>
+    <ion-list-header style="padding-left: 36px;">
+      {{ historyDetail.merchantName }}
+    </ion-list-header>
+  </ion-list>
+
+  <ion-list class="ion-padding-bottom" style="margin-top: 8px;">
+    <ion-list-header style="padding-left: 26px !important; padding-right: 26px;">
+      <ion-label color="darkgray">Order</ion-label>
+      <ion-label color="lightgray" style="font-size: smaller; font-weight: normal;">
+        {{ historyDetail.dateTime | timeAgoThai }}</ion-label>
+    </ion-list-header>
+
+    <!-- Iterate items -->
+    <ion-item style="padding-right: 8px;" *ngFor="let item of historyDetail.items">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3.5">
+            <ion-img style="object-fit: cover; height: 80px;" [src]="item.imageUrl"></ion-img>
+          </ion-col>
+          <ion-col
+            style="padding-left: 16px; padding-top: 5px !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+            size="5">
+            <ion-text color="darkgray" class="menu-text">{{ item.foodName }}</ion-text><br />
+
+            <!-- Iterate options -->
+            <ion-text *ngFor="let option of item.options" color="gray" class="option-text">{{ option }}<br /></ion-text>
+          </ion-col>
+          <ion-col style="padding-top: 5px; overflow: visible; white-space: nowrap;"
+            class="ion-text-left ion-no-padding" size="1.25">
+            <ion-text color="darkgray">
+              <span class="stretch">{{ item.numberOfItem }}x</span>
+            </ion-text>
+          </ion-col>
+          <ion-col style="padding-top: 5px; overflow: scroll; white-space: nowrap;"
+            class="ion-text-right ion-no-padding" size="2.25">
+            <ion-text color="darkgray" style="font-weight: bold;">
+              <span class="stretch">{{ item.price }}฿</span>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+  <!-- Payment method -->
+  <ion-list class="ion-padding-bottom">
+    <ion-list-header style="padding-left: 26px !important;">
+      <ion-label color="darkgray">Payment method</ion-label>
+    </ion-list-header>
+
+    <ion-item style="padding-left: 36px !important;">
+      <ion-text class="font-smaller" color="gray">{{ historyDetail.paymentMethod }}</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <!-- Total price -->
+  <ion-toolbar class="ion-margin-bottom" style="--min-height: 72px; --padding-start: 26px; --padding-end: 26px;">
+    <ion-label slot="start" color="darkgray">
+      Total
+    </ion-label>
+    <ion-label slot="end" color="gprimary">
+      <span style="font-size: 16pt;" class="stretch">{{ totalPrice }}</span>
+      <ion-text color="darkgray"> ฿</ion-text>
+    </ion-label>
+  </ion-toolbar>
+
+  <!-- Status -->
+  <ion-toolbar style="--min-height: 72px; --padding-start: 26px; --padding-end: 26px;">
+    <ion-label slot="start" color="darkgray">
+      Status
+    </ion-label>
+    <ion-label slot="end" color="gprimary">
+        <ion-badge
+        [color]="getBadgeColor(historyDetail.state)"
+        style="margin-top: auto; margin-bottom: auto;"
+      >
+        {{ getBadgeText(historyDetail.state) }}
+      </ion-badge>
+    </ion-label>
+  </ion-toolbar>
+</ion-content>

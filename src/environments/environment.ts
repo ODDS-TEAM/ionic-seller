@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://desolate-dusk-25447.herokuapp.com'
+  apiUrl: 'http://139.5.145.242'
 };
 
 /*
